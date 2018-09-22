@@ -1,0 +1,10 @@
+70
+Functionality:
+[n] Adequate testing
+[n] Passes instructors tests
+
+Notes:
+* test_split is not using asserts
+    * your first test does not actually work all the time (try copying it and putting as last test case)
+    * another looks like it does not workqq
+* Should test for string no splits if you are not

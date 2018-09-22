@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C++" filename="sort.cpp"><comment type="block">/**
+ * @brief  Application to run sorting algorithms on random int data
+ *
+ * @author Dale Haverstock
+ * @date   2012-04-19
+ */</comment>
+
+<comment type="line">//==============================================================================</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"sort_lib.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iomanip&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdlib&gt;</cpp:file></cpp:include>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// Using declarations</comment>
+<using>using <name><name>std</name>::<name>string</name></name>;</using>
+<using>using <name><name>std</name>::<name>vector</name></name>;</using>
+<using>using <name><name>std</name>::<name>cout</name></name>;</using>
+<using>using <name><name>std</name>::<name>cerr</name></name>;</using>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// Function declarations</comment>
+<function_decl><type><name>void</name></type> <name>process_command_line</name><parameter_list>(<param><decl><type><name>Options</name>&amp;</type> <name>opts</name></decl></param>, <param><decl><type><name>int</name></type> <name>argc</name></decl></param>, <param><decl><type><name>char</name>*</type> <name><name>argv</name><index>[]</index></name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>void</name></type> <name>generate_random_data</name><parameter_list>(<param><decl><type><name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>&amp;</type> <name>data</name></decl></param>, <param><decl><type><name>int</name></type> <name>size</name></decl></param>, <param><decl><type><name>int</name></type> <name>seed</name></decl></param>, <param><decl><type><name>int</name></type> <name>mod</name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>void</name></type> <name>output_data</name><parameter_list>(<param><decl><type><name>const</name> <name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>&amp;</type></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>void</name></type> <name>output_usage_and_exit</name><parameter_list>(<param><decl><type><name>const</name> <name>string</name>&amp;</type> <name>cmd</name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>void</name></type> <name>output_error_and_exit</name><parameter_list>(<param><decl><type><name>const</name> <name>string</name>&amp;</type> <name>msg</name></decl></param>)</parameter_list>;</function_decl>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>int</name></type> <name>main</name><parameter_list>(<param><decl><type><name>int</name></type> <name>argc</name></decl></param>, <param><decl><type><name>char</name>*</type> <name><name>argv</name><index>[]</index></name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Options container</comment>
+    <decl_stmt><decl><type><name>Options</name></type> <name>opts</name></decl>;</decl_stmt>
+
+    <comment type="line">// Get values from the command line, opts may be changed</comment>
+    <expr_stmt><expr><call><name>process_command_line</name><argument_list>(<argument><expr><name>opts</name></expr></argument>, <argument><expr><name>argc</name></expr></argument>, <argument><expr><name>argv</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// Generate data</comment>
+    <decl_stmt><decl><type><name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name></type> <name>data</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>generate_random_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><name>opts</name>.<name>_data_size</name></expr></argument>, <argument><expr><name>opts</name>.<name>_seed</name></expr></argument>, <argument><expr><name>opts</name>.<name>_mod</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// Output data before sorting</comment>
+    <if>if<condition>(<expr><name>opts</name>.<name>_output_data</name></expr>)</condition><then>
+        <block>{ <expr_stmt><expr><name>cout</name> &lt;&lt; "\nData Before: "</expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if> 
+
+    <comment type="line">// Sort, if a sort was specified, there is no default</comment>
+    <if>if <condition>(<expr><name>opts</name>.<name>_quick_sort</name></expr>)</condition><then>     <block>{ <expr_stmt><expr><call><name>quick_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>      }</block></then></if>
+    <if>if <condition>(<expr><name>opts</name>.<name>_selection_sort</name></expr>)</condition><then> <block>{ <expr_stmt><expr><call><name>selection_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>  }</block></then></if>
+    <if>if <condition>(<expr><name>opts</name>.<name>_bubble_sort</name></expr>)</condition><then>    <block>{ <expr_stmt><expr><call><name>bubble_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>     }</block></then></if>
+    <if>if <condition>( <expr>!<name>opts</name>.<name>_quick_sort</name>      &amp;&amp;
+         !<name>opts</name>.<name>_selection_sort</name>  &amp;&amp;
+         !<name>opts</name>.<name>_bubble_sort</name></expr>  )</condition><then>
+        <block>{ <expr_stmt><expr><call><name>output_error_and_exit</name><argument_list>(<argument><expr>"No sort specified."</expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if>
+
+    <comment type="line">// Output data after sorting</comment>
+    <if>if<condition>(<expr><name>opts</name>.<name>_output_sorted_data</name></expr>)</condition><then>
+        <block>{ <expr_stmt><expr><name>cout</name> &lt;&lt; "\nData After: "</expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if> 
+
+    <return>return <expr>0</expr>;</return>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>generate_random_data</name><parameter_list>(<param><decl><type><name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>&amp;</type> <name>vec</name></decl></param>, <param><decl><type><name>int</name></type> <name>size</name></decl></param>, <param><decl><type><name>int</name></type> <name>seed</name></decl></param>, <param><decl><type><name>int</name></type> <name>mod</name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Resize vector</comment>
+    <expr_stmt><expr><name>vec</name>.<call><name>resize</name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// Set random number generator seed</comment>
+    <macro><name>srandom</name><argument_list>(<argument>static_cast&lt;unsigned int&gt;(seed)</argument>)</argument_list></macro><empty_stmt>;</empty_stmt>
+
+    <comment type="line">// Put random values in vector</comment>
+    <for>for (<init><decl><type><name><name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>::<name>size_type</name></name></type> <name>idx</name> =<init> <expr>0</expr></init></decl>;</init> <condition><expr><name>idx</name> &lt; <name>vec</name>.<call><name>size</name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr>++<name>idx</name></expr></incr>)
+    <block>{
+        <if>if<condition>(<expr><name>mod</name></expr>)</condition><then> <block>{ <expr_stmt><expr><name><name>vec</name><index>[<expr><name>idx</name></expr>]</index></name> = <call><name>random</name><argument_list>()</argument_list></call> % <name>mod</name></expr>;</expr_stmt> }</block></then>
+        <else>else    <block>{ <expr_stmt><expr><name><name>vec</name><index>[<expr><name>idx</name></expr>]</index></name> = <call><name>random</name><argument_list>()</argument_list></call></expr>;</expr_stmt>       }</block></else></if>
+    }</block></for>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>output_data</name><parameter_list>(<param><decl><type><name>const</name> <name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>&amp;</type> <name>vec</name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Number of columns, column width</comment>
+    <decl_stmt><decl><type><name>const</name> <name>int</name></type> <name>cols</name>  =<init>  <expr>7</expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>const</name> <name>int</name></type> <name>width</name> =<init> <expr>10</expr></init></decl>;</decl_stmt>
+
+    <comment type="line">// Output vector elements</comment>
+    <for>for (<init><decl><type><name><name><name>vector</name><argument_list>&lt;<argument><name>int</name></argument>&gt;</argument_list></name>::<name>size_type</name></name></type> <name>idx</name> =<init> <expr>0</expr></init></decl>;</init> <condition><expr><name>idx</name> &lt; <name>vec</name>.<call><name>size</name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr>++<name>idx</name></expr></incr>)
+    <block>{
+        <comment type="line">// Output newline to end row</comment>
+        <if>if <condition>( <expr>! (<name>idx</name> % <name>cols</name>)</expr> )</condition><then>
+           <block>{ <expr_stmt><expr><name>cout</name>  &lt;&lt; "\n"</expr>;</expr_stmt> }</block></then></if>
+
+        <expr_stmt><expr><name>cout</name> &lt;&lt; <call><name><name>std</name>::<name>setw</name></name><argument_list>(<argument><expr><name>width</name></expr></argument>)</argument_list></call> &lt;&lt; <name><name>vec</name><index>[<expr><name>idx</name></expr>]</index></name> &lt;&lt; " "</expr>;</expr_stmt>
+    }</block></for>
+
+    <expr_stmt><expr><name>cout</name> &lt;&lt; '\n'</expr>;</expr_stmt>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// Note:</comment>
+<comment type="line">//   * No check for C-string to int conversion success</comment>
+<comment type="line">//</comment>
+<function><type><name>void</name></type> <name>process_command_line</name><parameter_list>(<param><decl><type><name>Options</name>&amp;</type> <name>opts</name></decl></param>, <param><decl><type><name>int</name></type> <name>argc</name></decl></param>, <param><decl><type><name>char</name>*</type> <name><name>argv</name><index>[]</index></name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Useage message if no command line args</comment>
+    <if>if <condition>(<expr><name>argc</name> == 1</expr>)</condition><then>
+        <block>{ <expr_stmt><expr><call><name>output_usage_and_exit</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr>0</expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if>
+
+    <comment type="line">// Go through the argumets</comment>
+    <for>for (<init><decl><type><name>int</name></type> <name>idx</name> =<init> <expr>1</expr></init></decl>;</init> <condition><expr><name>idx</name> &lt; <name>argc</name></expr>;</condition> <incr><expr>++<name>idx</name></expr></incr>)
+    <block>{
+        <comment type="line">// Standard library string from C-string</comment>
+        <decl_stmt><decl><type><name>string</name></type> <name>opt</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+        <comment type="line">// Process the option</comment>
+        <if>if <condition>(<expr><name>opt</name> == "-h"</expr>)</condition><then>   <block>{ <expr_stmt><expr><call><name>output_usage_and_exit</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr>0</expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-qs"</expr>)</condition><then>  <block>{ <expr_stmt><expr><name>opts</name>.<name>_quick_sort</name>         = true</expr>;</expr_stmt>  }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-ss"</expr>)</condition><then>  <block>{ <expr_stmt><expr><name>opts</name>.<name>_selection_sort</name>     = true</expr>;</expr_stmt>  }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-bs"</expr>)</condition><then>  <block>{ <expr_stmt><expr><name>opts</name>.<name>_bubble_sort</name>        = true</expr>;</expr_stmt>  }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-od"</expr>)</condition><then>  <block>{ <expr_stmt><expr><name>opts</name>.<name>_output_data</name>        = true</expr>;</expr_stmt>  }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-osd"</expr>)</condition><then> <block>{ <expr_stmt><expr><name>opts</name>.<name>_output_sorted_data</name> = true</expr>;</expr_stmt>  }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-sz"</expr>)</condition><then>
+        <block>{
+            <if>if <condition>(<expr><name>idx</name> + 1 &lt; <name>argc</name></expr>)</condition><then> <block>{ <expr_stmt><expr>++<name>idx</name></expr>;</expr_stmt> <expr_stmt><expr><name>opts</name>.<name>_data_size</name> = <call><name>atoi</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then>
+            <else>else                <block>{ <expr_stmt><expr><call><name>output_error_and_exit</name><argument_list>(<argument><expr>"Value for -sz option is missing."</expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></else></if>
+        }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-rs"</expr>)</condition><then>
+        <block>{
+            <if>if <condition>(<expr><name>idx</name> + 1 &lt; <name>argc</name></expr>)</condition><then> <block>{ <expr_stmt><expr>++<name>idx</name></expr>;</expr_stmt> <expr_stmt><expr><name>opts</name>.<name>_seed</name> = <call><name>atoi</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then>
+            <else>else                <block>{ <expr_stmt><expr><call><name>output_error_and_exit</name><argument_list>(<argument><expr>"Value for -rs option is missing."</expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></else></if>
+        }</block></then></if>
+        <if>if <condition>(<expr><name>opt</name> == "-mod"</expr>)</condition><then>
+        <block>{
+            <if>if <condition>(<expr><name>idx</name> + 1 &lt; <name>argc</name></expr>)</condition><then> <block>{ <expr_stmt><expr>++<name>idx</name></expr>;</expr_stmt> <expr_stmt><expr><name>opts</name>.<name>_mod</name> = <call><name>atoi</name><argument_list>(<argument><expr><name><name>argv</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then>
+            <else>else                <block>{ <expr_stmt><expr><call><name>output_error_and_exit</name><argument_list>(<argument><expr>"Value for -mod option is missing."</expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></else></if>
+        }</block></then></if>
+        <if>if <condition>( <expr>(<name>opt</name> != "-h")   &amp;&amp;
+             (<name>opt</name> != "-qs")  &amp;&amp;
+             (<name>opt</name> != "-ss")  &amp;&amp;
+             (<name>opt</name> != "-bs")  &amp;&amp;
+             (<name>opt</name> != "-od")  &amp;&amp;
+             (<name>opt</name> != "-osd") &amp;&amp;
+             (<name>opt</name> != "-sz")  &amp;&amp;
+             (<name>opt</name> != "-rs")  &amp;&amp;
+             (<name>opt</name> != "-mod")</expr> )</condition><then>
+        <block>{
+           <expr_stmt><expr><call><name>output_error_and_exit</name><argument_list>(<argument><expr><call><name>string</name><argument_list>(<argument><expr>"Error: Bad option: "</expr></argument>)</argument_list></call> + <name>opt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        }</block></then></if>
+    }</block></for>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>output_usage_and_exit</name><parameter_list>(<param><decl><type><name>const</name> <name>string</name>&amp;</type> <name>cmd</name></decl></param>)</parameter_list>
+<block>{
+    <expr_stmt><expr><name>cout</name> &lt;&lt; 
+       "Usage: " &lt;&lt; <name>cmd</name> &lt;&lt; " [options]\n"
+       "  Options:\n"
+       "     -sz  int  The number of data items\n"
+       "     -rs  int  The random number generator seed\n"
+       "     -mod int  The mod value for random numbers\n"
+       "     -od       Output data to be sorted\n"
+       "     -osd      Output sorted data\n"
+       "     -qs       Use quick sort\n"
+       "     -ss       Use selection sort\n"
+       "     -bs       Use bubble sort\n"
+       "     -h        This message\n"
+       "\n"
+       "  A sort must be specified, there is no default sort.\n"
+       "  If more than 1 sort is specified then the first sort\n"
+       "  specified from the following order will be done.\n"
+       "     1. quick\n"
+       "     2. selection\n"
+       "     3. bubble\n"</expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>exit</name><argument_list>(<argument><expr>0</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>output_error_and_exit</name><parameter_list>(<param><decl><type><name>const</name> <name>string</name>&amp;</type> <name>msg</name></decl></param>)</parameter_list>
+<block>{
+    <expr_stmt><expr><name>cerr</name> &lt;&lt; "Error: " &lt;&lt; <name>msg</name> &lt;&lt; "\n"</expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>exit</name><argument_list>(<argument><expr>1</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+</unit>

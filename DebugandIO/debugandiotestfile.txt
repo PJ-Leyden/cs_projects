@@ -1,0 +1,4 @@
+This is a sample file with multiple
+lines. Function should read this in and output
+the text in this file without modifying the
+format.

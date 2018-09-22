@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C++" filename="sort_lib.cpp"><comment type="block" format="doxygen">/**
+ * @brief  Application to run sorting algorithms on random int data
+ *
+ * @author Dale Haverstock
+ * @date   2012-04-19
+ */</comment>
+
+<comment type="line">// sort library</comment>
+<comment type="line">//</comment>
+
+<comment type="line">//==============================================================================</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"sort_lib.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// Make shorter type names</comment>
+<typedef>typedef <type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name>::<name>size_type</name></name></type> <name>Vec_Idx</name>;</typedef>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// Function declarations, uppercase so those stand out</comment>
+<function_decl><type><name>void</name></type> <name>quick_sort</name><parameter_list>(<param><decl><type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></name>&amp;</type> <name>data</name></decl></param>, <param><decl><type><name>int</name></type> <name>left</name></decl></param>, <param><decl><type><name>int</name></type> <name>right</name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>void</name></type> <name>SWAP</name><parameter_list>(<param><decl><type><name>int</name>&amp;</type> <name>n1</name></decl></param>, <param><decl><type><name>int</name>&amp;</type> <name>n2</name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>bool</name></type> <name>LESS_THAN</name><parameter_list>(<param><decl><type><name>int</name></type> <name>n1</name></decl></param>, <param><decl><type><name>int</name></type> <name>n2</name></decl></param>)</parameter_list>;</function_decl>
+<function_decl><type><name>bool</name></type> <name>GREATER_THAN</name><parameter_list>(<param><decl><type><name>int</name></type> <name>n1</name></decl></param>, <param><decl><type><name>int</name></type> <name>n2</name></decl></param>)</parameter_list>;</function_decl>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>quick_sort</name><parameter_list>(<param><decl><type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></name>&amp;</type> <name>data</name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Do nothing if empty vector</comment>
+    <if>if <condition>(<expr><call><name><name>data</name>.<name>size</name></name><argument_list>()</argument_list></call> == 0</expr>)</condition><then>
+        <block>{ <return>return;</return> }</block></then></if>
+
+    <comment type="line">// Do the sort</comment>
+    <expr_stmt><expr><call><name>quick_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr><call><name><name>data</name>.<name>size</name></name><argument_list>()</argument_list></call> - 1</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// The unsigned ints cause problems here, jdx may go to -1.</comment>
+<comment type="line">// Subscripts are cast so there are no warnings.</comment>
+<function><type><name>void</name></type> <name>quick_sort</name><parameter_list>(<param><decl><type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></name>&amp;</type> <name>data</name></decl></param>, <param><decl><type><name>int</name></type> <name>left</name></decl></param>, <param><decl><type><name>int</name></type> <name>right</name></decl></param>)</parameter_list>
+<block>{
+      <comment type="line">// Calculate the pivot</comment>
+      <decl_stmt><decl><type><name>int</name></type> <name>pivot</name> <init>= <expr><name><name>data</name><index>[<expr><call><name>Vec_Idx</name><argument_list>(<argument><expr>(<name>left</name> + <name>right</name>) / 2</expr></argument>)</argument_list></call></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+      <comment type="line">// Partition</comment>
+      <decl_stmt><decl><type><name>int</name></type> <name>idx</name> <init>= <expr><name>left</name></expr></init>, <name>jdx</name> <init>= <expr><name>right</name></expr></init></decl>;</decl_stmt>
+      <while>while <condition>(<expr><name>idx</name> &lt;= <name>jdx</name></expr>)</condition> <block>{
+            <while>while <condition>(<expr><call><name>LESS_THAN</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><call><name>Vec_Idx</name><argument_list>(<argument><expr><name>idx</name></expr></argument>)</argument_list></call></expr>]</index></name></expr></argument>, <argument><expr><name>pivot</name></expr></argument>)</argument_list></call></expr>)</condition>
+                  <expr_stmt><expr><name>idx</name>++</expr>;</expr_stmt></while>
+
+            <while>while <condition>(<expr><call><name>GREATER_THAN</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><call><name>Vec_Idx</name><argument_list>(<argument><expr><name>jdx</name></expr></argument>)</argument_list></call></expr>]</index></name></expr></argument>, <argument><expr><name>pivot</name></expr></argument>)</argument_list></call></expr>)</condition>
+                  <expr_stmt><expr><name>jdx</name>--</expr>;</expr_stmt></while>
+
+            <if>if <condition>(<expr><name>idx</name> &lt;= <name>jdx</name></expr>)</condition><then>
+            <block>{
+                  <expr_stmt><expr><call><name>SWAP</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><call><name>Vec_Idx</name><argument_list>(<argument><expr><name>idx</name></expr></argument>)</argument_list></call></expr>]</index></name></expr></argument>, <argument><expr><name><name>data</name><index>[<expr><call><name>Vec_Idx</name><argument_list>(<argument><expr><name>jdx</name></expr></argument>)</argument_list></call></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                  <expr_stmt><expr><name>idx</name>++</expr>;</expr_stmt>
+                  <expr_stmt><expr><name>jdx</name>--</expr>;</expr_stmt>
+            }</block></then></if>
+      }</block></while>
+
+      <comment type="line">// Recurse</comment>
+      <if>if <condition>(<expr><name>left</name> &lt; <name>jdx</name></expr>)</condition><then>
+            <block>{ <expr_stmt><expr><call><name>quick_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><name>left</name></expr></argument>, <argument><expr><name>jdx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if>
+
+      <if>if <condition>(<expr><name>idx</name> &lt; <name>right</name></expr>)</condition><then>
+            <block>{ <expr_stmt><expr><call><name>quick_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><name>idx</name></expr></argument>, <argument><expr><name>right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> }</block></then></if>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>selection_sort</name><parameter_list>(<param><decl><type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></name>&amp;</type> <name>data</name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Do nothing if empty vector (note unsigned 0 - 1 is a big number)</comment>
+    <if>if <condition>(<expr><call><name><name>data</name>.<name>size</name></name><argument_list>()</argument_list></call> == 0</expr>)</condition><then>
+        <block>{ <return>return;</return> }</block></then></if>
+
+    <comment type="line">// Index of last element in vector, also last in unsorted part</comment>
+    <decl_stmt><decl><type><name>Vec_Idx</name></type> <name>last</name> <init>= <expr><call><name><name>data</name>.<name>size</name></name><argument_list>()</argument_list></call> - 1</expr></init></decl>;</decl_stmt>
+
+    <comment type="line">// Do the sort</comment>
+    <while>while <condition>(<expr><name>last</name> &gt; 0</expr>)</condition>
+    <block>{
+        <comment type="line">// Find greatest in unsorted part</comment>
+        <decl_stmt><decl><type><name>Vec_Idx</name></type> <name>idx_of_greatest</name> <init>= <expr>0</expr></init></decl>;</decl_stmt>
+        <for>for (<init><decl><type><name>Vec_Idx</name></type> <name>idx</name> <init>= <expr>0</expr></init></decl>;</init> <condition><expr><name>idx</name> &lt;= <name>last</name></expr>;</condition> <incr><expr>++<name>idx</name></expr></incr>)
+        <block>{
+            <if>if <condition>( <expr><call><name>LESS_THAN</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><name>idx_of_greatest</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>data</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr> )</condition><then>
+            <block>{
+                <comment type="line">// Remember as new greatest so far</comment>
+                <expr_stmt><expr><name>idx_of_greatest</name> = <name>idx</name></expr>;</expr_stmt>
+            }</block></then></if>
+        }</block></for>
+
+        <comment type="line">// Swap last in unsorted with greatest in unsorted part</comment>
+        <expr_stmt><expr><call><name>SWAP</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><name>last</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>data</name><index>[<expr><name>idx_of_greatest</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// Increase sorted part</comment>
+        <expr_stmt><expr>--<name>last</name></expr>;</expr_stmt>
+    }</block></while>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<function><type><name>void</name></type> <name>bubble_sort</name><parameter_list>(<param><decl><type><name><name>std</name>::<name><name>vector</name><argument_list>&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></name>&amp;</type> <name>data</name></decl></param>)</parameter_list>
+<block>{
+    <comment type="line">// Go through vector repeatedly</comment>
+    <for>for(<init><decl><type><name>Vec_Idx</name></type> <name>limit</name> <init>= <expr><call><name><name>data</name>.<name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>limit</name> &gt; 0</expr>;</condition> <incr><expr><name>limit</name>--</expr></incr>)
+    <block>{
+        <comment type="line">// Go through vector once, swap element and next element if out of order</comment>
+        <for>for(<init><decl><type><name>Vec_Idx</name></type> <name>idx</name> <init>= <expr>0</expr></init></decl>;</init> <condition><expr><name>idx</name> &lt; <name>limit</name> - 1</expr>;</condition> <incr><expr><name>idx</name>++</expr></incr>)
+        <block>{
+            <if>if<condition>( <expr><call><name>LESS_THAN</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><name>idx</name> + 1</expr>]</index></name></expr></argument>, <argument><expr><name><name>data</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr> )</condition><then>
+            <block>{
+                <expr_stmt><expr><call><name>SWAP</name><argument_list>(<argument><expr><name><name>data</name><index>[<expr><name>idx</name></expr>]</index></name></expr></argument>,<argument><expr><name><name>data</name><index>[<expr><name>idx</name> + 1</expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            }</block></then></if>
+        }</block></for>
+    }</block></for>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// This is here so the number of calls can be counted.</comment>
+<function><type><name>void</name></type> <name>SWAP</name><parameter_list>(<param><decl><type><name>int</name>&amp;</type> <name>n1</name></decl></param>, <param><decl><type><name>int</name>&amp;</type> <name>n2</name></decl></param>)</parameter_list>
+<block>{
+    <expr_stmt><expr><call><name><name>std</name>::<name>swap</name></name><argument_list>(<argument><expr><name>n1</name></expr></argument>, <argument><expr><name>n2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// This is here so the number of calls can be counted.</comment>
+<function><type><name>bool</name></type> <name>LESS_THAN</name><parameter_list>(<param><decl><type><name>int</name></type> <name>n1</name></decl></param>, <param><decl><type><name>int</name></type> <name>n2</name></decl></param>)</parameter_list>
+<block>{
+    <return>return <expr><name>n1</name> &lt; <name>n2</name></expr>;</return>
+}</block></function>
+
+<comment type="line">//==============================================================================</comment>
+<comment type="line">// This is here so the number of calls can be counted.</comment>
+<function><type><name>bool</name></type> <name>GREATER_THAN</name><parameter_list>(<param><decl><type><name>int</name></type> <name>n1</name></decl></param>, <param><decl><type><name>int</name></type> <name>n2</name></decl></param>)</parameter_list>
+<block>{
+    <return>return <expr><name>n1</name> &gt; <name>n2</name></expr>;</return>
+}</block></function>
+
+</unit>

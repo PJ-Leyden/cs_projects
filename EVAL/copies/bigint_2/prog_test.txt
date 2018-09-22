@@ -1,0 +1,45 @@
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c bigint.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c test_default_ctor.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -o test_default_ctor bigint.o test_default_ctor.o
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c test_int_ctor.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -o test_int_ctor bigint.o test_int_ctor.o
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c test_equal.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -o test_equal bigint.o test_equal.o
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c test_c_str_ctor.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -o test_c_str_ctor bigint.o test_c_str_ctor.o
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -c test_add.cpp
+clang++ -g -Wall -W -Wunused -Wuninitialized -Wshadow -std=c++11 -o test_add bigint.o test_add.o
+./test_default_ctor
+0 == 0
+Done testing default constructor.
+./test_int_ctor
+0 == 0
+1 == 1
+100000 == 100000
+27 ==  27
+5006 ==  5006
+456789 == 456789
+Done testing constructor bigint(int).
+./test_equal
+0 == 0
+1234 == 1234
+1234 != 234
+1234 != 123
+Done testing ==.
+./test_c_str_ctor
+6234567890 == 6234567890
+62345 == 62345
+12345678901234567890123456789012345678901234567890
+123456789012345678901234567890
+==
+12345678901234567890123456789012345678901234567890
+123456789012345678901234567890
+Done testing constructor bigint(char[]).
+./test_add
+49 + 51 = 100
+49 + 51 = 100
+Done with testing addition.
+./test_subscript
+make: ./test_subscript: Command not found
+make: *** [tests] Error 127
+rm test_int_ctor.o test_equal.o test_add.o test_c_str_ctor.o test_default_ctor.o

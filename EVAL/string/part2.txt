@@ -1,0 +1,6 @@
+60
+Functionality:
+[y] Uses dynamic memory
+[y] Implemented 7 required new functions
+[n] Passes provided test oracle
+[not run] Passes instructor tests (e.g., input exceeds default cap and result exceeds current cap)

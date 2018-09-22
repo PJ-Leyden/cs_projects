@@ -1,0 +1,86 @@
+Infix Expression: ( AX + ( B * C ) ) ;
+Postfix Expression: AX B C * +
+
+   LD	 B
+   ML	 C
+   ST	 TMP1
+   LD	 AX
+   AD	 TMP1
+   ST	 TMP2
+
+Infix Expression: ( ( AX + ( B * CY ) ) / ( D - E ) ) ;
+Postfix Expression: AX B CY * + D E - /
+
+   LD	 B
+   ML	 CY
+   ST	 TMP1
+   LD	 AX
+   AD	 TMP1
+   ST	 TMP2
+   LD	 D
+   SB	 E
+   ST	 TMP3
+   LD	 TMP2
+   DV	 TMP3
+   ST	 TMP4
+
+Infix Expression: ( ( A + B ) * ( C + E ) ) ;
+Postfix Expression: A B + C E + *
+
+   LD	 A
+   AD	 B
+   ST	 TMP1
+   LD	 C
+   AD	 E
+   ST	 TMP2
+   LD	 TMP1
+   ML	 TMP2
+   ST	 TMP3
+
+Infix Expression: ( AX * ( BX * ( ( ( CY + AY ) + BY ) * CX ) ) ) ;
+Postfix Expression: AX BX CY AY + BY + CX * * *
+
+   LD	 CY
+   AD	 AY
+   ST	 TMP1
+   LD	 TMP1
+   AD	 BY
+   ST	 TMP2
+   LD	 TMP2
+   ML	 CX
+   ST	 TMP3
+   LD	 BX
+   ML	 TMP3
+   ST	 TMP4
+   LD	 AX
+   ML	 TMP4
+   ST	 TMP5
+
+Infix Expression: ( ( H * ( ( ( ( A + ( ( B + C ) * D ) ) * F ) * G ) * E ) ) + J ) ;
+Postfix Expression: H A B C + D * + F * G * E * * J +
+
+   LD	 B
+   AD	 C
+   ST	 TMP1
+   LD	 TMP1
+   ML	 D
+   ST	 TMP2
+   LD	 A
+   AD	 TMP2
+   ST	 TMP3
+   LD	 TMP3
+   ML	 F
+   ST	 TMP4
+   LD	 TMP4
+   ML	 G
+   ST	 TMP5
+   LD	 TMP5
+   ML	 E
+   ST	 TMP6
+   LD	 H
+   ML	 TMP6
+   ST	 TMP7
+   LD	 TMP7
+   AD	 J
+   ST	 TMP8
+

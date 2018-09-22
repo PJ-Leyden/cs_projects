@@ -1,0 +1,8 @@
+lab1 10 # Make sure you	follow the general requirements.
+lab2 10 # All required files present. Do not commit executables.
+lab3 9 # testinglab1 added no files.  Added only one test for add and none for multiply
+lab4 10 # Not functions. 1st ignores whitespace.  2nd, outputs whitespace. 3rd, mostly correct.  Data file heavily modified.
+lab5 10 # Good job.
+lab6 10 # Good job.
+lab7 10 # Good job.  The getline needed the same fix as getWord (prints one line too many).
+lab8 10 # Works as written.  However, does not run function on all values. First printed without call.  Regular works with all, but tail does not.

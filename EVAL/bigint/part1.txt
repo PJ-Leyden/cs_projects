@@ -1,0 +1,11 @@
+100
+Functionality:
+* Fully operational
+
+General Requirements:
+* No header comments of files and methods
+* Too many marking of complete in commit messages
+* Comments one same line as statement intead of line before
+* Remove commented out code
+* Do not use while(true)
+* Do not assign to parameters

@@ -1,0 +1,9 @@
+100
+Functionality:
+* no add.cpp
+* operator+, operator[], and operator>> work
+* added test cases
+
+
+[regrade]
+* Works fine.

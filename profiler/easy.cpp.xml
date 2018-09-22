@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C++" filename="easy.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{
+	<decl_stmt><decl><type><name>int</name></type> <name>x</name> <init>= <expr>4</expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>y</name> <init>= <expr><name>x</name></expr></init></decl>;</decl_stmt>
+
+	<return>return <expr>0</expr>;</return>
+}</block></function></unit>

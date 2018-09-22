@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C++" filename="simple.cpp"><comment type="line">////////////////////////////////////////////////////////////////////</comment>
+<comment type="line">// File:         simple.cpp</comment>
+<comment type="line">// Creation:     4/2013</comment>
+<comment type="line">// Programmer:   Dr. J. Maletic</comment>
+<comment type="line">//</comment>
+<comment type="line">// Description:  Simple program for testing profiler</comment>
+<comment type="line">//</comment>
+<comment type="line">//</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>search</name><parameter_list>(<param><decl><type><name>int</name></type> <name><name>tbl</name><index>[]</index></name></decl></param>, <param><decl><type><name>int</name></type> <name>n</name></decl></param>, <param><decl><type><name>int</name></type> <name>key</name></decl></param>)</parameter_list> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> =<init> <expr>-1</expr></init></decl>;</decl_stmt>
+    <for>for (<init><decl><type><name>int</name></type> <name>i</name> =<init> <expr>0</expr></init></decl>;</init> <condition><expr><name>i</name> &lt; <name>n</name></expr>;</condition> <incr><expr>++<name>i</name></expr></incr>) <block>{
+        <if>if <condition>(<expr><name>key</name> == <name><name>tbl</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition><then> <block>{
+            <expr_stmt><expr><name>result</name> = <name>i</name></expr>;</expr_stmt>
+        }</block></then></if>
+    }</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+}</block></function>
+
+
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list> <block>{
+
+    <decl_stmt><decl><type><name>int</name></type> <name><name>lst</name><index>[<expr>5</expr>]</index></name> =<init> <expr><block>{<expr>2</expr>, <expr>4</expr>, <expr>6</expr>, <expr>8</expr>, <expr>10</expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>std</name>::<name>cout</name></name> &lt;&lt; <call><name>search</name><argument_list>(<argument><expr><name>lst</name></expr></argument>, <argument><expr>5</expr></argument>, <argument><expr>6</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name>::<name>cout</name></name> &lt;&lt; <name><name>std</name>::<name>endl</name></name></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><name><name>std</name>::<name>cout</name></name> &lt;&lt; "Done"</expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name>::<name>cout</name></name> &lt;&lt; <name><name>std</name>::<name>endl</name></name></expr>;</expr_stmt>
+    <return>return <expr>0</expr>;</return>
+}</block></function>
+</unit>

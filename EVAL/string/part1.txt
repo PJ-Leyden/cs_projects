@@ -1,0 +1,11 @@
+75
+Functionality:
+* Used revision 3458
+* 25/25 functions implemented
+* Insufficent tests in single file and wrong naming convention
+* Fails instructor operator+,
+passes other instructor select function tests
+
+Other:
+* Do not need if/else to check and return bool
+* Should separate individual tests/test files

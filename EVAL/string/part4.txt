@@ -1,0 +1,13 @@
+60
+Functionality:
+[?] Correctly parses log file
+[n] Prints out entries (all)
+[n] Prints out number of bytes
+[n] Prints out host
+[n] Runs on all provided files
+
+Notes:
+* Does not print anything due to loop condition
+* Fixed loop condition only runs on log_1_tiny.txt
+* Modified headers to change type of data stored (i.e., strings instead of ints.)
+* Stores read in line and prints instead of printing logEntry.  So, can not ascertain if parsed correctly.

@@ -1,0 +1,12 @@
+90
+Functionality:
+* Only one test for timesTen/timesDigit
+* timesTen & timesDigit not methods
+* No multiply.cpp
+* Instructors multiply.cpp seg faults after all prints
+* Passes instructor tests
+
+
+[regrade]
+* Works
+* Needs more tests.
