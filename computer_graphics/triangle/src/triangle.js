@@ -1,6 +1,6 @@
 var gl;
 var points = [];
-var verts = [];
+var start_verts = [];
 var triangle_center;
 var theta = 0;
 var max_theta = Math.PI/2;
@@ -8,13 +8,18 @@ var untwist = false;
 var translation_down = 0;
 
 window.onload = function init(){
-	var canvas = document.getElementById( "gl-canvas" );
+	//create canvas from canvas set up in html
+	var canvas = document.getElementById("gl-canvas");
+
+	//gl object given canvas
 	gl = WebGLUtils.setupWebGL( canvas );
+	//check
 	if ( !gl ) { alert( "WebGL isn't available" );}
 
-	verts.push([-Math.sin(Math.PI/3), -Math.cos(Math.PI/3) - translation_down]);
-	verts.push([0, 1 - translation_down]);
-	verts.push([Math.sin(Math.PI/3), -Math.cos(Math.PI/3) - translation_down]);
+	//Setup initial vertecies
+	start_verts.push([-Math.sin(Math.PI/3), -Math.cos(Math.PI/3) - translation_down]);
+	start_verts.push([0, 1 - translation_down]);
+	start_verts.push([Math.sin(Math.PI/3), -Math.cos(Math.PI/3) - translation_down]);
 
 	triangle_center = [0, 0];
 	
@@ -25,7 +30,7 @@ window.onload = function init(){
 
 //  Load shaders and initialize attribute buffers
 	var program = initShaders( gl, "vertex-shader", "fragment-shader" );
-	gl.useProgram( program );
+	gl.useProgram(program);
 
 // Load the data into the GPU
 	var bufferId = gl.createBuffer();
@@ -33,7 +38,7 @@ window.onload = function init(){
 	gl.bufferData( gl.ARRAY_BUFFER, 8*Math.pow(4, 6), gl.STATIC_DRAW );
 
 // Associate our shader variables with our data buffer
-	var vPosition = gl.getAttribLocation( program, "vPosition" );
+	var vPosition = gl.getAttribLocation(program, "vPosition");
 	gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
 	gl.enableVertexAttribArray( vPosition );
 
@@ -45,9 +50,11 @@ function rotate_point(p){
 	var old_y = p[1];
 	var dist_center = Math.sqrt(Math.pow(triangle_center[0] - old_x, 2) + Math.pow(triangle_center[1] - old_y, 2));
 
+	old_y += translation_down;
+
 	var x = old_x*Math.cos(theta * dist_center) - old_y*Math.sin(theta * dist_center);
 	var y = old_y*Math.cos(theta * dist_center) + old_x*Math.sin(theta * dist_center); 
-	return [x, y];
+	return [x, (y - translation_down)];
 }
 
 function sub_divide(a, b, c, num){
@@ -72,6 +79,7 @@ function sub_divide(a, b, c, num){
 	}
 }
 
+//called 10 times a second
 function render() {
 	points = [];
 	
@@ -87,9 +95,9 @@ function render() {
 		}
 	}
 
-	sub_divide(verts[0], verts[1], verts[2], 5);
+	sub_divide(start_verts[0], start_verts[1], start_verts[2], 5);
 
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(points))
+	gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(points));
 	gl.clear( gl.COLOR_BUFFER_BIT );
 	gl.drawArrays(gl.TRIANGLES, 0, points.length);
 }
