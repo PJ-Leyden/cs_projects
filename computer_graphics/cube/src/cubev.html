@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html>
-
+<meta charset="UTF-8">
 <script id="vertex-shader" type="x-shader/x-vertex">
 
 attribute  vec4 vPosition;
@@ -57,11 +58,25 @@ main()
 <script type="text/javascript" src="cubev.js"></script>
 
 <body>
+
+<div>
+speed 0% <input id="slider" type="range"
+ min="0" max="100" step="10" value="50" />
+ 100%
+</div>
+
+<br/>
+
 <canvas id="gl-canvas" width="512"" height="512">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
    
 <br/>
+
+<select id="Controls" size="2">
+    <option value="0">Spin Faster</option>
+    <option value="1">Spin Slower</option>
+</select>
 
 <button id= "xButton">Rotate X</button>
 <button id= "yButton">Rotate Y</button>

@@ -10,6 +10,7 @@ var yAxis =1;
 var zAxis = 2;
 var theta = [ 0, 0, 0 ];
 var thetaLoc;
+var delay = 100;
 
     var vertices = [
         vec3( -0.5, -0.5,  0.5 ),
@@ -97,6 +98,24 @@ window.onload = function init()
     thetaLoc = gl.getUniformLocation(program, "theta"); 
     
     //event listeners for buttons
+
+    //var fColor = gl.getAttribLocation( program, "fColor" );
+    document.getElementById("slider").onchange = function(event) {
+        vColor.w = event.srcElement.value / 100;
+        //speed = 100 - event.srcElement.value;
+    };
+
+    document.getElementById("Controls" ).onclick = function(event) {
+        //switch( event.srcElement.index ) {
+        switch( event.target.index ) {
+         case 0:
+            delay /= 2.0;
+            break;
+         case 1:
+            delay *= 2.0;
+            break;
+       }
+    };
     
     document.getElementById( "xButton" ).onclick = function () {
         axis = xAxis;
@@ -122,6 +141,8 @@ function render()
 
     gl.drawElements( gl.TRIANGLES, numVertices, gl.UNSIGNED_BYTE, 0 );
 
-    requestAnimFrame( render );
+    setTimeout(
+        function (){requestAnimFrame(render);}, delay
+    );
 }
 

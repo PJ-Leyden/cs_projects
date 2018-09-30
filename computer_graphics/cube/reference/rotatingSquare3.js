@@ -49,14 +49,15 @@ window.onload = function init()
 
     // Initialize event handlers
 
-    document.getElementById("slider").onchange = function() {
+    document.getElementById("slider").onchange = function(event) {
+        //gl_FragColor.w
         speed = 100 - event.srcElement.value;
     };
     document.getElementById("Direction").onclick = function () {
         direction = !direction;
     };
 
-    document.getElementById("Controls").onclick = function( event) {
+    document.getElementById("Controls").onclick = function(event) {
         switch(event.srcElement.index) {
           case 0:
             direction = !direction;
