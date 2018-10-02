@@ -8,6 +8,7 @@ attribute  vec4 vColor;
 varying vec4 fColor;
 
 uniform vec3 theta;
+uniform float u_alpha;
 
 void main() 
 {
@@ -34,7 +35,7 @@ void main()
 		    0.0,  0.0, 1.0, 0.0,
 		    0.0,  0.0, 0.0, 1.0 );
 
-    fColor = vColor;
+    fColor = vec4(vColor.x, vColor.y, vColor.z, u_alpha);
     gl_Position = rz * ry * rx * vPosition;
 } 
 </script>
@@ -60,7 +61,7 @@ main()
 <body>
 
 <div>
-speed 0% <input id="slider" type="range"
+Alpha 0% <input id="slider" type="range"
  min="0" max="100" step="10" value="50" />
  100%
 </div>

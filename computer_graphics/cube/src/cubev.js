@@ -10,7 +10,9 @@ var yAxis =1;
 var zAxis = 2;
 var theta = [ 0, 0, 0 ];
 var thetaLoc;
+var u_alpha_loc;
 var delay = 100;
+var slider_alpha = 100;
 
     var vertices = [
         vec3( -0.5, -0.5,  0.5 ),
@@ -53,6 +55,8 @@ var indices = [
 
 window.onload = function init()
 {
+//Set Up
+//===============================================================================	
     canvas = document.getElementById( "gl-canvas" );
     
     gl = WebGLUtils.setupWebGL( canvas );
@@ -61,22 +65,24 @@ window.onload = function init()
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     
-    gl.enable(gl.DEPTH_TEST);;
-
-    //
-    //  Load shaders and initialize attribute buffers
-    //
+    gl.enable(gl.DEPTH_TEST);
+//===============================================================================
+//
+// Load shaders and initialize attribute buffers
+//
+//===============================================================================    
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
+//===============================================================================
     
-    // array element buffer
-    
+// array element buffer
+//===============================================================================    
     var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
     
-    // color array atrribute buffer
-    
+// color array atrribute buffer
+//===============================================================================    
     var cBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(vertexColors), gl.STATIC_DRAW );
@@ -85,8 +91,8 @@ window.onload = function init()
     gl.vertexAttribPointer( vColor, 4, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vColor );
 
-    // vertex array attribute buffer
-    
+// vertex array attribute buffer
+//===============================================================================    
     var vBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW );
@@ -96,12 +102,12 @@ window.onload = function init()
     gl.enableVertexAttribArray( vPosition );
 
     thetaLoc = gl.getUniformLocation(program, "theta"); 
+    u_alpha_loc = gl.getUniformLocation(program, "u_alpha");
     
-    //event listeners for buttons
-
-    //var fColor = gl.getAttribLocation( program, "fColor" );
+//Button, Sliders, Menus
+//===============================================================================
     document.getElementById("slider").onchange = function(event) {
-        vColor.w = event.srcElement.value / 100;
+        slider_alpha = event.srcElement.value / 100;
         //speed = 100 - event.srcElement.value;
     };
 
@@ -126,7 +132,7 @@ window.onload = function init()
     document.getElementById( "zButton" ).onclick = function () {
         axis = zAxis;
     };
-
+//===============================================================================
     
     render();
 }
@@ -137,6 +143,7 @@ function render()
 
     theta[axis] += 2.0;
     gl.uniform3fv(thetaLoc, theta);
+    gl.uniform1f(u_alpha_loc, slider_alpha);
 
 
     gl.drawElements( gl.TRIANGLES, numVertices, gl.UNSIGNED_BYTE, 0 );
