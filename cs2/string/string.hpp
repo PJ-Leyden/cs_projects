@@ -55,7 +55,7 @@ public:
     friend  std::ostream& operator<<(std::ostream&, const String&);
 private:
     char *s;
-    int  Capacity;
+    int  capacity;
 };
 
 std::istream& operator>>(std::istream&, String&);
