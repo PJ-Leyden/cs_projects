@@ -1,0 +1,3 @@
+[submodule "ai_group_project"]
+	path = ai_group_project
+	url = https://github.com/PJ-Leyden/ai_group_project.git
