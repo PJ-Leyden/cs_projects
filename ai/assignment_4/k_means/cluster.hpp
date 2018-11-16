@@ -6,7 +6,7 @@
 class Cluster{
 private:
 	Points members;
-	std::pair<double, double> centroid;
+	Point centroid;
 	double radius;
 
 public:
@@ -15,14 +15,15 @@ public:
 
 	bool generate_random_centroid(double, double, double, double); //get init centroid provided range in max, min, x, y
 	bool recalculate_centroid();// recalculate centroid based on points in members
-	bool add_point(std::pair<double, double>); // add point to members
-	bool remove_point(std::pair<double, double>); // remove point from members
+	bool add_point(Point); // add point to members
+	bool remove_point(Point); // remove point from members
+	void set_radius(double r){radius = r;};
 	Points& get_members();
-	std::pair<double, double> get_centroid();
+	Point get_centroid();
 
 	friend std::ostream& operator<<(std::ostream&, const Cluster&);
 
 
-}
+};
 
 #endif
