@@ -21,14 +21,14 @@
 String::String(){//default constr
 	s = new char[DEFAULT_STRING_CAPACITY];
 	s[0] = '\0';
-	Capacity = DEFAULT_STRING_CAPACITY;
+	capacity = DEFAULT_STRING_CAPACITY;
 }
 //====================================================================
 String::String(char temp){//constr - conversion of a single character to a string
 	s = new char[DEFAULT_STRING_CAPACITY];
 	s[0] = temp;
 	s[1] = '\0';
-	Capacity = DEFAULT_STRING_CAPACITY;
+	capacity = DEFAULT_STRING_CAPACITY;
 }
 //====================================================================
 String::String(const char* temp){//constr - conversion of litterally char array to string
@@ -40,11 +40,11 @@ String::String(const char* temp){//constr - conversion of litterally char array 
 	//====================================
 	if(check >= 256){
 		s = new char[check];
-		Capacity = check;
+		capacity = check;
 	}
 	else{
 		s = new char[DEFAULT_STRING_CAPACITY];
-		Capacity = DEFAULT_STRING_CAPACITY;
+		capacity = DEFAULT_STRING_CAPACITY;
 	}
 	int indx = 0;
 	while(temp[indx] != '\0'){
@@ -56,8 +56,8 @@ String::String(const char* temp){//constr - conversion of litterally char array 
 //====================================================================
 String::String(int initCap, const char* temp){//constr - set cap and init value. Ideally, the capacity should be 
 	int indx = 0;                             //         long enough for the litteral and the null terminator
-	Capacity = initCap;                         
-	s = new char[Capacity];
+	capacity = initCap;                         
+	s = new char[capacity];
 	while(temp[indx] != '\0' && !(indx >= initCap)){//checks for null terminator and that the indx 
 		s[indx] = temp[indx];                       //is not greater than or equall to the capacity  
 		indx++;
@@ -71,8 +71,8 @@ String::String(int initCap, const char* temp){//constr - set cap and init value.
 }
 //====================================================================
 String::String(int initCap){//constr - sets empty string with init cap
-	Capacity = initCap;
-	s = new char[Capacity];
+	capacity = initCap;
+	s = new char[capacity];
 	s[0] = '\0';
 }
 //====================================================================
@@ -81,8 +81,8 @@ String::String(const String& temp){//copy constr - copies... duh...
 		//return *this;
 	//}
 	int indx = 0;
-	Capacity = temp.Capacity;
-	s = new char[Capacity];
+	capacity = temp.capacity;
+	s = new char[capacity];
 	while(temp.s[indx] != '\0'){
 		s[indx] = temp.s[indx];
 		indx++;
@@ -97,8 +97,8 @@ String::~String(){//destructor - destructs... duh...
 //====================================================================
 String& String::operator=(String temp){// = op with copy symantex
 	delete[] s;
-	Capacity = temp.Capacity;
-	s = new char[Capacity];
+	capacity = temp.capacity;
+	s = new char[capacity];
 	int indx = 0;
 	while(temp.s[indx] != '\0'){
 		s[indx] = temp.s[indx];
@@ -115,19 +115,19 @@ void String::swap(String& rhs){
 	//delete temp;
 }
 //====================================================================
-void String::resetCapacity(int newCap){
+void String::resetcapacity(int newCap){
 	String temp(*this);
 	/*if(temp.length() >= newCap){
-		std::cout<<"Capacity to small"<<'\n';
-		Capacity = temp.length() + 1;
+		std::cout<<"capacity to small"<<'\n';
+		capacity = temp.length() + 1;
 	}*/
 	//else{
-	Capacity = newCap;
+	capacity = newCap;
 	//}
 	delete[] s;
-	s = new char[Capacity];
+	s = new char[capacity];
 	int indx = 0;
-	while(temp[indx] != '\0' && indx < Capacity - 1){
+	while(temp[indx] != '\0' && indx < capacity - 1){
 		s[indx] = temp[indx];
 		indx++;
 	}
@@ -146,7 +146,7 @@ char String::operator[](int indxAt) const{
 }
 //====================================================================
 int String::capacity() const{
-	return Capacity;
+	return capacity;
 	//HC
 }
 //====================================================================
@@ -246,7 +246,7 @@ std::istream& operator>>(std::istream& in, String& inString){// in >> inString
 		}
 		//=====================================
 		if(length >= inString.capacity()){
-			inString.resetCapacity(length + 1);
+			inString.resetcapacity(length + 1);
 		}
 		//=====================================
 		for(int i = 0; i < length; i++){
