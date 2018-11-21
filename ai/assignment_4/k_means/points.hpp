@@ -3,29 +3,34 @@
 
 #include <iostream>
 #include <utility>
-#include <list>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
 
 struct Point{
 	double x;
 	double y;
+
+	Point(){};
+	Point(double ix, double iy){x = ix; y = iy;};
+	bool operator==(const Point&);
 };
 
 class Points{
 private:
-	std::list<Point> pts;
+	std::vector<Point> pts;
 	int size; // number of points in pts
 
 public:
 	Points(){size = 0;};
 
-	bool generate_random_points(int, double, double, double, double);
-	bool check(const Point&);//check for point in pts
-	bool add_point(const Point&);
-	bool remove_point(const Point&);
-	int size(){return size;};
+	void   generate_random_points(int, double maxX, double minX, double maxY, double minY);
+	int    check                 (const Point&);//check for point in pts
+	void   add_point             (const Point&);
+	int    get_size              ()const{return size;};
+	Point& operator[]            (int);
 
+	const Point& operator[]      (int)const;
 	friend std::ostream& operator<<(std::ostream&, const Points&);
 
 };
