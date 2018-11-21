@@ -4,27 +4,12 @@
 #include <iostream>
 #include <utility>
 #include <list>
+#include <cstdlib>
+#include <ctime>
 
-class Point{
-private:
+struct Point{
 	double x;
 	double y;
-
-public:
-	Point(){};
-	Point(double ix, double iy){
-		x = ix;
-		y = iy;
-	};
-	void set_x(double ix){x = ix};
-	void set_y(double iy){y = iy};
-	void set_point(double ix, double iy){
-		x = ix;
-		y = iy;
-	};
-	void get_x(){return x;};
-	void get_y(){return y;};
-
 };
 
 class Points{
@@ -36,9 +21,9 @@ public:
 	Points(){size = 0;};
 
 	bool generate_random_points(int, double, double, double, double);
-	bool check(Point);//check for point in pts
-	bool add_point(Point);
-	bool remove_point(Point);
+	bool check(const Point&);//check for point in pts
+	bool add_point(const Point&);
+	bool remove_point(const Point&);
 	int size(){return size;};
 
 	friend std::ostream& operator<<(std::ostream&, const Points&);
