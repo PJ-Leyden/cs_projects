@@ -2,6 +2,12 @@
 
 int main(){
 
+	HMM hmm(5, 6);
+
+	hmm.set_emissions_matrix();
+
+	std::cout << hmm << std::endl;
+
 	//Understand that the states and emissions
 	//are represented as numbers
 	//ex. emission {1, 2, 3 ...} or state {1, 2, 3 ...}

@@ -3,17 +3,18 @@
 
 #include <list>
 #include <iostream>
+#include <map>
 
-struct Node{
-	char name;
-};
+//struct Node{
+//	char name;
+//};
 
 class HMM{
 private:
 	int num_states;
 	int num_emissions;
 	//std::map<Node, double> init_value_map;
-	std::map<int, double> init_value_map;
+	std::map<int, double> init_value_map;// probablity of starting node
 	//std::list<Node> states;
 	double** transitions; // matrix [NS x NS]
 	double** emissions; // matrix [NS x NE]
@@ -30,6 +31,8 @@ public:
 	void set_observations();
 
 	void calculate_path(); // ensure have all info 
+
+	friend std::ostream& operator<<(std::ostream&, const HMM&);
 
 };
 
