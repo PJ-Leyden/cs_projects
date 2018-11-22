@@ -2,6 +2,7 @@
 #define AI_4_CLUSTER
 
 #include "points.hpp"
+#include "regression.hpp"
 
 class Cluster{
 private:
@@ -13,13 +14,12 @@ public:
 	Cluster(){};
 	Cluster(double r){radius = r;};
 
-	bool generate_random_centroid(double, double, double, double); //get init centroid provided range in max, min, x, y
-	bool recalculate_centroid();// recalculate centroid based on points in members
-	bool add_point(Point); // add point to members
-	bool remove_point(Point); // remove point from members
+	void generate_random_centroid(double, double, double, double, int); //get init centroid provided range in max, min, x, y
+	void recalculate_centroid();// recalculate centroid based on points in members
 	void set_radius(double r){radius = r;};
-	Points& get_members();
-	Point get_centroid();
+	Points& get_members(){return members;};
+	Point& get_centroid(){return centroid;};
+	double get_radius(){return radius;};
 
 	friend std::ostream& operator<<(std::ostream&, const Cluster&);
 

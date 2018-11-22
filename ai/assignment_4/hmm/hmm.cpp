@@ -41,7 +41,7 @@ HMM::~HMM(){
 }
 
 void HMM::set_emissions_matrix(){
-
+	emissions = new *double[]
 }
 
 void HMM::set_transitions_matrix(){

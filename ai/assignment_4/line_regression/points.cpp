@@ -13,9 +13,13 @@ void Points::generate_random_points(int num, double maxX, double minX, double ma
 	for(int i = 0; i < num; i++){
 		int x = (rand() % (int)(maxX - minX)) + minX;
 		int y = (rand() % (int)(maxY - minY)) + minY;
-		Point temp; temp.x = x; temp.y = y;
-		pts.push_back(temp);
-		size++;
+		Point temp(x, y);
+		if(check(temp) == -1){
+			pts.push_back(temp);
+			size++;
+		}else{
+			--i;
+		}
 	}
 }
 
@@ -28,9 +32,25 @@ int Points::check(const Point& p){
 	return -1;
 }
 
-void Points::add_point(const Point& p){
-	pts.push_back(p);
-	size++;
+bool Points::add_point(const Point& p){
+	if(check(p) == -1){
+		pts.push_back(p);
+		size++;
+		return true;
+	}
+	return false;
+}
+
+bool Points::remove_point(const Point& p){
+	int indx = check(p);
+	if(indx != -1){
+		for(int i = indx; i < size - 1; i++){
+			pts[indx] = pts[indx + 1];
+			pts.pop_back();
+			return true;
+		}
+	}
+	return false;
 }
 
 Point& Points::operator[](int x){

@@ -13,7 +13,7 @@ double distance(const Point& p1, const Point& p2){
 }
 
 std::ostream& operator<<(std::ostream& out, const Point& p){
-	out << "(" << p.x << "," << p.y << ") Cluster: " << p.cluster;
+	out << "(" << p.x << "," << p.y << ")";
 	return out;
 }
 
@@ -60,11 +60,10 @@ bool Points::remove_point(const Point& p){
 	int indx = check(p);
 	if(indx != -1){
 		for(int i = indx; i < size - 1; i++){
-			pts[i] = pts[i + 1];
+			pts[indx] = pts[indx + 1];
+			pts.pop_back();
+			return true;
 		}
-		size--;
-		pts.pop_back();
-		return true;
 	}
 	return false;
 }
@@ -78,17 +77,13 @@ const Point& Points::operator[](int x)const{
 }
 
 std::ostream& operator<<(std::ostream& out, const Points& points){
-	/*for(int i = 0; i < points.size; i+=4){
+	for(int i = 0; i < points.size; i+=4){
 		for(int j = 0; j < 4; j++){
 			if(i+j < points.size){
 				out << "P" << i + j + 1 << points[i+j] << " \t";
 			}
 		}
 		out << '\n';
-	}*/
-	for(int i = 0; i < points.size; i++){
-		out << "P" << i + 1 << points[i] << "\n";
 	}
-
 	return out;
 }

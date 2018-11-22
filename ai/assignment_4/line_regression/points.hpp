@@ -26,7 +26,8 @@ public:
 
 	void   generate_random_points(int, double maxX, double minX, double maxY, double minY);
 	int    check                 (const Point&);//check for point in pts
-	void   add_point             (const Point&);
+	bool   add_point             (const Point&);
+	bool   remove_point          (const Point&);
 	int    get_size              ()const{return size;};
 	Point& operator[]            (int);
 
