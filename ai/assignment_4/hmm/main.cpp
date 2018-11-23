@@ -2,7 +2,9 @@
 
 int main(){
 
-	HMM hmm(5, 6);
+	HMM hmm(4, 4);
+
+	hmm.set_transitions_matrix();
 
 	hmm.set_emissions_matrix();
 

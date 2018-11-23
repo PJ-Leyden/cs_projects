@@ -50,21 +50,94 @@ HMM::~HMM(){
 }
 
 void HMM::set_emissions_matrix(){
-	//possible do in constructor
-	transitions[1][2] = 5.9;
-	emissions[1][2] = 4.0;
+	//each node needs to have 1 as the sum total probability of leaving. 
+	//The matrix is state by state ot state to state x to y
+	//columns should add up to 1 
+	srand(time(NULL) * 2);
+	for(int i = 0; i < num_states; i++){
+		double hundred = 100.0;
+		std::vector<double> weights;
+		for(int j = 0; j < num_emissions; j++){
+			double random = rand() % 101;
+			if(j == num_states - 1){
+				weights.push_back(hundred / 100.0);
+			}else{
+				if(hundred == 0){
+					weights.push_back(0.0);
+				}else{
+					if(hundred - random < 0){
+						weights.push_back(hundred / 100.0);
+						hundred = 0;
+					}else{
+						weights.push_back(random / 100.0);
+						hundred -= random;
+					}
+				}
+			}
+		}
+		std::random_shuffle(weights.begin(), weights.end());
+		for(int j = 0; j < num_emissions; j++){
+			emissions[i][j] = weights[j];
+		}
+	}
 }
 
 void HMM::set_transitions_matrix(){
-
+	//each node needs to have 1 as the sum total probability of leaving. 
+	//The matrix is state by state ot state to state x to y
+	//columns should add up to 1 
+	srand(time(NULL));
+	for(int i = 0; i < num_states; i++){
+		double hundred = 100.0;
+		std::vector<double> weights;
+		for(int j = 0; j < num_states; j++){
+			double random = rand() % 101;
+			if(j == num_states - 1){
+				weights.push_back(hundred / 100.0);
+			}else{
+				if(hundred == 0){
+					weights.push_back(0.0);
+				}else{
+					if(hundred - random < 0){
+						weights.push_back(hundred / 100.0);
+						hundred = 0;
+					}else{
+						weights.push_back(random / 100.0);
+						hundred -= random;
+					}
+				}
+			}
+		}
+		std::random_shuffle(weights.begin(), weights.end());
+		for(int j = 0; j < num_states; j++){
+			transitions[i][j] = weights[j];
+		}
+	}
 }
 
 void HMM::set_observations(){
-
+	std::cout << "Enter the number of observations: ";
+	std::cin >> num_observations;
+	std::cout << '\n';
+	observations = new double[num_observations];
+	for(int i = 0; i < num_observations; i++){
+		std::cout << "Enter an observation. {1, 2, 3, ... etc.}: ";
+		std::cin >> observations[i];
+		std::cout << '\n';
+	}
 }
 
 void HMM::calculate_path(){
-	
+	//calculate all possible paths that create said observation sequence. 
+	//take the most probable path
+	//for each possible init state
+		//calculate probability of it running with the first obser
+		//add next_transtion next transition should be (trans * emisssion on next state)
+			//next_transition should calculate the probabilty of the next transtion and return it. 
+			//ends if probability is zero. simply return zero.
+	//recursion to dig into the path of the tree
+	//helper function called next_transition returns
+	//so many possibilites...
 }
 
 std::ostream& operator<<(std::ostream& out, const HMM& hmm){

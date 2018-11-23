@@ -3,7 +3,11 @@
 
 #include <list>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include <map>
+#include <algorithm>
+#include <vector>
 
 //struct Node{
 //	char name;
@@ -13,6 +17,7 @@ class HMM{
 private:
 	int num_states;
 	int num_emissions;
+	int num_observations;
 	//std::map<Node, double> init_value_map;
 	std::map<int, double> init_value_map;// probablity of starting node
 	//std::list<Node> states;
