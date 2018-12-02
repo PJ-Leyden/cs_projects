@@ -8,7 +8,13 @@ int main(){
 
 	hmm.set_emissions_matrix();
 
+	hmm.set_observations();
+
+	hmm.set_init_values();
+
 	std::cout << hmm << std::endl;
+
+	hmm.calculate_path();	
 
 	//Understand that the states and emissions
 	//are represented as numbers
