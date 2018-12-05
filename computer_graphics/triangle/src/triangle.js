@@ -59,6 +59,7 @@ function rotate_point(p){
 
 	var x = old_x*Math.cos(theta * dist_center) - old_y*Math.sin(theta * dist_center);
 	var y = old_y*Math.cos(theta * dist_center) + old_x*Math.sin(theta * dist_center); 
+	
 	return [(x + translation[0]), (y + translation[1])];
 }
 
