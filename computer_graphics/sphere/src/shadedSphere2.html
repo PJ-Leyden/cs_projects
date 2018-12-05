@@ -5,12 +5,16 @@
 
 attribute vec4 vPosition;
 attribute vec4 vNormal;
+
 varying vec3 N, L, E;
+varying vec4 myPos;
+
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform vec4 lightPosition;
 uniform mat3 normalMatrix;
-varying vec4 myPos;
+
+
 
 void main()
 {
@@ -24,8 +28,8 @@ void main()
     E =  -normalize(pos);
     N = normalize( normalMatrix*vNormal.xyz);
 
-    myPos = projectionMatrix * modelViewMatrix * vPosition;
-    gl_Position = myPos;
+    myPos = vPosition;
+    gl_Position = projectionMatrix * modelViewMatrix * vPosition;
     
 }
 </script>

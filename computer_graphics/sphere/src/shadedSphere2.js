@@ -1,4 +1,4 @@
-
+//push into seperate arrays then combine.
 
 var canvas;
 var gl;
@@ -54,6 +54,7 @@ var normalMatrix, normalMatrixLoc;
 var eye;
 var at = vec3(0.0, 0.0, 0.0);
 var up = vec3(0.0, 1.0, 0.0);
+var program;
     
 function triangle(a, b, c) {
 
@@ -61,7 +62,7 @@ function triangle(a, b, c) {
      pointsArray.push(b);      
      pointsArray.push(c);
      
-          // normals are vectors
+         // normals are vectors
      
      normalsArray.push(a[0],a[1], a[2], 0.0);
      normalsArray.push(b[0],b[1], b[2], 0.0);
@@ -116,7 +117,7 @@ window.onload = function init() {
     //
     //  Load shaders and initialize attribute buffers
     //
-    var program = initShaders( gl, "vertex-shader", "fragment-shader" );
+    program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
     
 
@@ -127,8 +128,6 @@ window.onload = function init() {
     ambientProduct2 = mult(lightAmbient, materialAmbient2);
     diffuseProduct2 = mult(lightDiffuse, materialDiffuse2);
     specularProduct2 = mult(lightSpecular, materialSpecular2);
-
-
 
     
     tetrahedron(va, vb, vc, vd, numTimesToSubdivide);
@@ -166,6 +165,10 @@ window.onload = function init() {
         index = 0;
         pointsArray = []; 
         normalsArray = [];
+        par = [];
+        pal = [];
+        nar = [];
+        nal = [];
         init();
     };
     document.getElementById("Button7").onclick = function(){
@@ -173,6 +176,10 @@ window.onload = function init() {
         index = 0;
         pointsArray = []; 
         normalsArray = [];
+        par = [];
+        pal = [];
+        nar = [];
+        nal = [];
         init();
     };
 
@@ -196,6 +203,8 @@ window.onload = function init() {
        "specularProduct2"),flatten(specularProduct2) );
     gl.uniform1f( gl.getUniformLocation(program, 
        "shininess2"),materialShininess2 );
+
+
 
     render();
 }
@@ -221,9 +230,11 @@ function render() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix) );
     gl.uniformMatrix3fv(normalMatrixLoc, false, flatten(normalMatrix) );
-        
-    for( var i=0; i<index; i+=3) 
-        gl.drawArrays( gl.TRIANGLES, i, 3 );
+
+
+    for(var i=0; i<index; i+=3){
+    	gl.drawArrays(gl.TRIANGLES, i, 3);
+    }
 
     window.requestAnimFrame(render);
 }
