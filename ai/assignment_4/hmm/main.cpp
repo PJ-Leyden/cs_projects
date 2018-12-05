@@ -2,6 +2,20 @@
 
 int main(){
 
+	HMM hmm(4, 4);
+
+	hmm.set_transitions_matrix();
+
+	hmm.set_emissions_matrix();
+
+	hmm.set_observations();
+
+	hmm.set_init_values();
+
+	std::cout << hmm << std::endl;
+
+	hmm.calculate_path();	
+
 	//Understand that the states and emissions
 	//are represented as numbers
 	//ex. emission {1, 2, 3 ...} or state {1, 2, 3 ...}

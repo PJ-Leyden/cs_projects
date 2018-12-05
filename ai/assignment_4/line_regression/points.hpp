@@ -6,21 +6,15 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <cmath>
 
 struct Point{
 	double x;
 	double y;
-	int cluster = -1;
 
 	Point(){};
 	Point(double ix, double iy){x = ix; y = iy;};
 	bool operator==(const Point&);
-	friend std::ostream& operator<<(std::ostream&, const Point&);
-	friend double distance(const Point&, const Point&);
 };
-
-Point generate_random_point(double maxX, double minX, double maxY, double minY);
 
 class Points{
 private:
