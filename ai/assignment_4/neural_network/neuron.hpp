@@ -15,7 +15,7 @@ public:
 	double                     value;
 	std::vector<Neuron*>       outputs;
 
-	Neuron();
+	Neuron(){};
 };
 
 #endif 

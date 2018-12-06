@@ -1,4 +1,5 @@
 #include "neural_network.hpp"
+#include "data.hpp"
 
 int main(){
 
@@ -10,6 +11,13 @@ int main(){
 	
 	//build network
 	nn.build_network();
+
+	Data out = nn.run_network();
+
+
+	std::cout << out;
+
+
 
 	return 0;
 }

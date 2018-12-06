@@ -44,6 +44,14 @@ void Neural_Network::set_network_parameters(){
 			std::cout << '\n';		
 		}
 	}
+
+	std::cout << "Set threshold: ";
+	std::cin >> threshold;
+	std::cout << '\n';
+
+	num_input = neurons_per_layer[0];
+	num_output = neurons_per_layer[num_layers - 1];
+
 }
 
 void Neural_Network::build_network(){
@@ -79,5 +87,37 @@ void Neural_Network::build_network(){
 			}
 		}
 	}
+}
+
+Data Neural_Network::run_network(){
+
+	Data input_data(num_input);
+	std::cout << "Enter data points: \n";
+	for(int i = 0; i < num_input; i++){
+		std::cout << i << ": ";
+		std::cin >> input_data.d[i];
+		std::cout << '\n';
+	}
+
+	for(int i = 0; i < num_layers; i++){//i is layer num
+		for(int j = 0; j < neurons_per_layer[i]; j++){//j is neuron number
+			//neurons[i][j]->
+			if(i == 0){//is input layer
+				neurons[i][j]->value = input_data.d[j];
+			}
+			for(std::pair<double, Neuron*> cur : neurons[i][j]->inputs){
+				if(cur.second->value >= threshold){
+					neurons[i][j]->value += cur.first * cur.second->value;
+				} 
+			}
+		}
+	}
+
+	Data result(num_output);
+	for(int i = 0; i < num_output; i++){
+		result.d[i] = neurons[num_layers - 1][i]->value;
+	}
+
+	return result;
 
 }

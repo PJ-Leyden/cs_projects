@@ -2,6 +2,7 @@
 #define AI_4_NETWORK
 
 #include "neuron.hpp"
+#include "data.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -24,12 +25,18 @@ private:
 	//Ex. Num neurons in input layer = neurons_per_layer[0];
 	int* neurons_per_layer;
 
+	double threshold = 1;
+
+	int num_input;
+	int num_output;
+
 public:
 	Neural_Network();
 	~Neural_Network();
 
 	void set_network_parameters(); //setting num_layers and neurons_per_layer
 	void build_network(); //this is gonna be a pain...
+	Data run_network();
 
 
 
