@@ -2,7 +2,17 @@
 
 int main(){
 
-	HMM hmm(4, 4);
+	std::cout << "Enter number of states: ";
+	int states;
+	std::cin >> states;
+	std::cout << '\n';
+
+	std::cout << "Enter number of emissions: ";
+	int emissions;
+	std::cin >> emissions;
+	std::cout << '\n';
+
+	HMM hmm(states, emissions);
 
 	hmm.set_transitions_matrix();
 

@@ -1,29 +1,5 @@
 #include "hmm.hpp"
 
-void probability(std::string& seq, double odds, int next_state, int depth, std::map<std::string, double>* pp, HMM& hmm){
-	std::cerr << "Depth: " << depth << '\n';
-	if(depth == hmm.num_observations){
-		std::cerr << "End Depth\n";
-		std::pair<std::string, double> temp(seq, odds);
-		std::cerr << "Temped\n";
-		pp->insert( temp );
-		std::cerr << "Finished End Depth\n";
-	}else if(hmm.emissions[next_state][hmm.observations[depth]] == 0){
-		std::cerr << "0 Chance\n";
-		return;
-	}else{
-		std::cerr << "Inner Transitions\n";
-		for(int i = 0; i < hmm.num_states; i++){//possible transitions for next_state
-			std::cerr << "Inner Transition: " << i << '\n';
-			if(hmm.transitions[next_state][i] != 0){
-				seq = seq + std::to_string(i);
-				odds = odds * hmm.emissions[next_state][hmm.observations[depth]] * hmm.transitions[next_state][i];
-				probability(seq, odds, i, depth + 1, pp, hmm);
-			}
-		}
-	}
-}
-
 HMM::HMM(){
 	num_states = 0;
 	num_emissions = 0;
@@ -181,25 +157,63 @@ void HMM::set_init_values(){
 
 }
 
+void HMM::probability(std::string seq, double odds, int cur_state, int depth){//transition | emission
+	if(depth == num_observations){
+		std::pair<std::string, double> temp(seq, odds);
+		path_prob.insert( temp );
+		return;
+	}else{
+		for(int i = 0; i < num_states; i++){//possible transitions for next_state
+			if(transitions[cur_state][i] != 0 && emissions[i][observations[depth]] != 0){
+
+				int seq_num = i + 1;
+				std::string next_seq = seq + std::to_string(seq_num);
+
+				odds = odds * transitions[cur_state][i] * emissions[i][observations[depth]];
+				probability(next_seq, odds, i, depth + 1);
+			}
+		}
+	}
+}
+
 void HMM::calculate_path(){
-	std::map<std::string, double>* path_prob;
 	int count = 0;
 	for(std::pair<int, double> init : init_value_map){
 		if(std::get<1>(init) != 0){
-			std::string seq = std::to_string(std::get<0>(init));
-			double odds = std::get<1>(init);
-			int ns = std::get<0>(init);
-			int depth = 0;
-			std::cout << "Called Main Probability: " << count << '\n';
-			probability(seq, odds, ns, depth, path_prob, *this);
+
+			int         depth = 1;
+			std::string seq   = std::to_string(std::get<0>(init));
+			double      odds  = std::get<1>(init) * emissions[std::get<0>(init) - 1][observations[0]];
+			int         cs    = std::get<0>(init) - 1;
+
+			//std::cout << "Called Main Probability: " << count << '\n';
+			//std::cout << "Param: Seq = " << seq << " Odds = " << odds << " Current State = " << cs << "\n";
+
+			probability(seq, odds, cs, depth);
+
 			count++;
 		}
 	}
 
-	std::cout << "DONE!\n";
+	std::cout << "\n\nPossible Paths:\n";
 
-	for(std::pair<std::string, double> path : *path_prob){
+	std::string best_path = "";
+	double probability = 0;
+
+	for(std::pair<std::string, double> path : path_prob){
+		if(path.second > probability){
+			probability = path.second;
+			best_path = path.first;
+		}
 		std::cout << "Path: " << path.first << " = " << path.second << '\n';
+	}
+
+	if(probability != 0){
+		std::cout << "\nMost Probable Path:\n";
+		std::cout << "Path: \t\t\t" << best_path << '\n';
+		std::cout << "Probability: \t" << probability << '\n';
+	}else{
+		std::cout << "Observation sequence not possible.\n";
 	}
 	//calculate all possible paths that create said observation sequence. 
 	//take the most probable path
@@ -222,6 +236,13 @@ std::ostream& operator<<(std::ostream& out, const HMM& hmm){
 
 	out << '\n';
 
+	out << "Observations: \n";
+	for(int i = 0; i < hmm.num_observations; i++){
+		out << "{" << i << " , " << hmm.observations[i] << "}\n";
+	}
+
+	out << '\n';
+
 	out << "Transitions Matrix: \n";
 	for(int i = 0; i < hmm.num_states; i++){
 		out << '|';
@@ -230,7 +251,9 @@ std::ostream& operator<<(std::ostream& out, const HMM& hmm){
 		}
 		out << '\n';
 	}
+
 	out << '\n';
+
 	out << "Emissions Matrix: \n";
 	for(int i = 0; i < hmm.num_emissions; i++){
 		out << '|';

@@ -20,6 +20,7 @@ private:
 	int num_observations;
 	//std::map<Node, double> init_value_map;
 	std::map<int, double> init_value_map;// probablity of starting node
+	std::map<std::string, double> path_prob;// probabilities of paths for set of observations
 	//std::list<Node> states;
 	double** transitions; // matrix [NS x NS]
 	double** emissions; // matrix [NS x NE]
@@ -36,9 +37,10 @@ public:
 	void set_observations();
 	void set_init_values();
 
+	void probability(std::string, double, int, int);
 	void calculate_path(); // ensure have all info 
 
-	friend void probability(std::string&, double, int, int, std::map<std::string, double>*, HMM&);
+	
 	friend std::ostream& operator<<(std::ostream&, const HMM&);
 
 };
