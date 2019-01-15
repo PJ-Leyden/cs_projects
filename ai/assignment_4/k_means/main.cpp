@@ -27,14 +27,14 @@ int main(){//hard or soft clustering? (hard hopefully)
 	all_points.generate_random_points(80, maxX, minX, maxY, minY);
 
 	//decide on number of clusters
-	int num_clusters = 4;
+	int num_clusters = 6;
 
 	//create clusters and outlier set
 	Cluster clusters[num_clusters];
 	Points outliers;
 
 	//decide threshold
-	double radius = 2000;	
+	double radius = 30;	
 
 	//generate random centroid for clusters
 	for(int i = 0; i < num_clusters; i++){
