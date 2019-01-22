@@ -1,0 +1,20 @@
+CS III Notes Jan 15th, 2019
+//==================================
+Procedural Programming
+Program Governed By:
+	- Syntax = Construction of Language
+	- Semantic = Rules that govern the meaning, loops
+	- Stylistic = Readable for human readers 
+Primitive Types = string, int, bool, char, double
+	- int = long, short, signed, unsigned
+	- char = signed, unsigned
+	- float = float, double, long double
+	- auto = type determined by compiler (C++11)
+	- decltype = determine type based on different variable
+Operators are built in functions
+	- Fixed number of operands
+	- Arity = number of operands
+		- Unary = 1 operand
+		- Binary = 2 operand
+		- Ternary = 3 operands
+
