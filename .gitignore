@@ -33,4 +33,4 @@
 *.sh
 
 # SVN
-*.svn
+/.svn
