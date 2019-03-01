@@ -1,0 +1,30 @@
+CS III Notes Jan 17th, 2019
+//==================================
+unspecified
+	- not specified in the standard
+undefined
+	- stated in the standard but not implemented
+implementation-defined
+	- vary by compiler
+expression
+	- computing new values from old ones
+	- the type of an expression is determined by the compiler and is dependent on operands and operator
+	- value is determined at runtime execution
+evaluation
+	- finding the value of an expression
+implicit conversion of type
+	- coersion
+explicit conversion of type
+	- casting
+sparse
+	- takes more space
+terse
+	- takes less space
+invocation/call
+	- use of a function or method
+resolution
+	- determing what happens
+client/caller
+	- code that uses function
+callee
+	- what's called
