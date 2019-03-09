@@ -22,19 +22,18 @@ using std::make_pair;
 template <typename T>
 class DefaultHash {
 public:
-   DefaultHash(size_t numBuckets = defaultNumBuckets);
-   size_t hash(const T& key) const;
-   size_t numBuckets() const { return numBuckets_; }
+	DefaultHash(size_t numBuckets = defaultNumBuckets);
+	size_t hash(const T& key) const;
+	size_t numBuckets() const { return numBuckets_; }
 
 private:
-   // default number of buckets in the hash
-   static const size_t defaultNumBuckets = 101; 
-   size_t numBuckets_;
+	// default number of buckets in the hash
+	static const size_t defaultNumBuckets = 101; 
+	size_t numBuckets_;
 };
 
 template <typename T>
-DefaultHash<T>::DefaultHash(size_t numBuckets): 
-                numBuckets_(numBuckets) {}
+DefaultHash<T>::DefaultHash(size_t numBuckets) : numBuckets_(numBuckets) {}
 
 
 // uses the division method for hashing.
@@ -43,13 +42,12 @@ DefaultHash<T>::DefaultHash(size_t numBuckets):
 // of buckets.
 template <typename T>
 size_t DefaultHash<T>::hash(const T& key) const {
-   size_t res = 0;
-   for (size_t i = 0; i < sizeof(key); ++i) {
-      const unsigned char b = 
-      *(reinterpret_cast<const unsigned char *>(&key) + i);
-      res += b;
-   }
-   return res % numBuckets_;
+	size_t res = 0;
+	for (size_t i = 0; i < sizeof(key); ++i) {
+		const unsigned char b = *(reinterpret_cast<const unsigned char *>(&key) + i);
+		res += b;
+	}
+	return res % numBuckets_;
 }
 
 
@@ -58,38 +56,36 @@ size_t DefaultHash<T>::hash(const T& key) const {
 ////////////////////////////////////////////////
 
 template <typename Key, typename Value, 
-          typename Compare = std::equal_to<Key>,
-          typename Hash = DefaultHash<Key>>
+		  typename Compare = std::equal_to<Key>,
+		  typename Hash = DefaultHash<Key>>
 class hashmap{
 
 public:
-   typedef pair<const Key, Value> Element;
+	typedef pair<const Key, Value> Element;
 
-   // constructor
-   // invokes constructors for comparison and hash objects
-   hashmap(const Compare& comp = Compare(), 
-	   const Hash& hash = Hash());
+	// constructor
+	// invokes constructors for comparison and hash objects
+						 hashmap(const Compare& comp = Compare(), const Hash& hash = Hash());
 
-   Element* find(const Key& x);      // returns pointer to element with key x,
-                                     // nullptr if not found
-   void insert(const Element& x);    // inserts the key/value pair 
-   void erase(const Key& x);         // erases element with key x, if exists
-   Value& operator[] (const Key& x); // returns reference on value of
-                                     // element with key, inserts if does not exist
+	Element*             find(const Key& x);    	  // returns pointer to element with key x,
+													  // nullptr if not found
+	pair<Element*, bool> insert(const Element& x);    // inserts the key/value pair 
+	pair<Element*, bool> erase(const Key& x);         // erases element with key x, if exists
+	Value&               operator[] (const Key& x);   // returns reference on value of
+													  // element with key, inserts if does not exist
+	void                 rehash(size_t n);
 private:
 
-   // helper function for various searches
-   typename list<Element>::iterator
-        findElement(const Key& x, 
-		    const size_t bucket);
+	// helper function for various searches
+	typename list<Element>::iterator findElement(const Key& x, const size_t bucket);
 
-   size_t size_;   // number of elements in the container
-   Compare comp_;  // comparison functor, equal_to by default
-   Hash hash_;     // hash functor 
+	size_t size_;   // number of elements in the container
+	Compare comp_;  // comparison functor, equal_to by default
+	Hash hash_;     // hash functor 
 
-   // hash contents: vector of buckets
-   // each bucket is a list containing key->value pairs
-   vector<list<Element>> elems_;
+	// hash contents: vector of buckets
+	// each bucket is a list containing key->value pairs
+	vector<list<Element>> elems_;
 };
 
 
@@ -99,24 +95,22 @@ private:
 
 // Construct elems_ with the number of buckets.
 template <typename Key, typename Value, typename Compare, typename Hash>
-   hashmap<Key, Value, Compare, Hash>::hashmap(
-   const Compare& comp, const Hash& hash):
-   size_(0), comp_(comp), hash_(hash) {
-      elems_ = vector<list<Element>>(hash_.numBuckets());
+	hashmap<Key, Value, Compare, Hash>::hashmap(
+	const Compare& comp, const Hash& hash):
+	size_(0), comp_(comp), hash_(hash) {
+		elems_ = vector<list<Element>>(hash_.numBuckets());
 }
 
 
-// helper function
-template <typename Key, typename Value, 
-          typename Compare, typename Hash>
-   typename list<pair<const Key, Value>>::iterator // return type
-   hashmap<Key, Value, Compare, Hash>::findElement(const Key& x, size_t bucket){
+//find a specific key in a specific bucket
+template <typename Key, typename Value, typename Compare, typename Hash>
+	typename list<pair<const Key, Value>>::iterator // return type CAN replace with list<Element>::iterator
+	hashmap<Key, Value, Compare, Hash>::findElement(const Key& x, size_t bucket){
 
-   // look for the key in the bucket
-   for (auto it =  elems_[bucket].begin();
-  	     it != elems_[bucket].end(); ++it)
-      if (comp_(it->first, x))
-	 return it;
+	// look for the key in the bucket
+	for (auto it =  elems_[bucket].begin(); it != elems_[bucket].end(); ++it)
+		if (comp_(it->first, x))
+			return it;
 
    return elems_[bucket].end(); // element not found
 }
@@ -125,19 +119,19 @@ template <typename Key, typename Value,
 // returns a pointer to the element with key x
 // returns nullptr if no element with this key
 template <typename Key, typename Value, typename Compare, typename Hash>
-   typename hashmap<Key, Value, Compare, Hash>::Element* // return value type
-   hashmap<Key, Value, Compare, Hash>::find(const Key& x) {
+	typename hashmap<Key, Value, Compare, Hash>::Element* // return value type
+	hashmap<Key, Value, Compare, Hash>::find(const Key& x) {
 
-   size_t bucket = hash_.hash(x);
-   auto it=findElement(x, bucket);    // use the findElement() helper   
+	size_t bucket = hash_.hash(x);
+	auto it=findElement(x, bucket);    // use the findElement() helper   
 
-   if (it != elems_[bucket].end())
-      // found the element. Return a pointer to it.
-      return &(*it); // dereference the iterator to list 
-                     // then take the address of list element
+	if (it != elems_[bucket].end())
+		// found the element. Return a pointer to it.
+		return &(*it); // dereference the iterator to list 
+					 // then take the address of list element
    
-   else // didn't find the element -- return nullptr
-      return nullptr;
+	else // didn't find the element -- return nullptr
+		return nullptr;
 }
 
 
@@ -145,29 +139,46 @@ template <typename Key, typename Value, typename Compare, typename Hash>
 // element with that key if none exists yet. Returns a reference to
 // the value corresponding to that key.
 template <typename Key, typename Value, typename Compare, typename Hash>
-void hashmap<Key, Value, Compare, Hash>::insert(const Element& x) {
+pair<typename hashmap<Key, Value, Compare, Hash>::Element*, bool> 
+hashmap<Key, Value, Compare, Hash>::insert(const Element& x) {
 
-   size_t bucket = hash_.hash(x.first);   
-   auto it = findElement(x.first, bucket);    // try to find the element
+	size_t bucket = hash_.hash(x.first);   
+	auto it = findElement(x.first, bucket);    // try to find the element
 
-   // if not found, insert a new one.
-   if (it == elems_[bucket].end()) {
-      ++size_;
-      elems_[bucket].push_back(x);
-   } 
+	// if not found, insert a new one.
+	if (it == elems_[bucket].end()) {
+
+		++size_;
+		elems_[bucket].push_back(x);
+		it = findElement(x.first, bucket);
+		return make_pair(&(*it), true);
+
+	// iff did find
+	}else{
+
+		return make_pair(&(*it), false);
+
+	}
+
 }
 
 
 // removes the Element with key x, if it exists
 template <typename Key, typename Value, typename Compare, typename Hash>
-void hashmap<Key, Value, Compare, Hash>::erase(const Key& x) {
+pair<typename hashmap<Key, Value, Compare, Hash>::Element*, bool>
+hashmap<Key, Value, Compare, Hash>::erase(const Key& x) {
 
-   size_t bucket = hash_.hash(x);
-   auto it = findElement(x, bucket);    // try to find the element
-   if (it != elems_[bucket].end()) {    // the element exists, erase it
-      elems_[bucket].erase(it);
-      --size_;
-   }
+	size_t bucket = hash_.hash(x);
+	auto it = findElement(x, bucket);    // try to find the element
+
+	if (it != elems_[bucket].end()) {    // the element exists, erase it
+		elems_[bucket].erase(it);
+		--size_;
+
+	//if element doesn't exist
+	}else{
+		return make_pair(*Element(), false);
+	}
 }
 
 
@@ -176,11 +187,22 @@ void hashmap<Key, Value, Compare, Hash>::erase(const Key& x) {
 template <typename Key, typename Value, typename Compare, typename Hash>
 Value& hashmap<Key, Value, Compare, Hash>::operator[] (const Key& x) {
 
-   Element* found = find(x);
-   if (found == nullptr) { // if key not found, create new element with empty value
-      insert(make_pair(x, 
-		       Value())); // calling default constructor on Value
-      found = find(x); // inefficient but avoids code duplication
-   }
-   return found->second;
+	auto p = insert(make_pair(x, Value()));
+	return p.first->second;
+/*
+	Element* found = find(x);
+	if (found == nullptr) { // if key not found, create new element with empty value
+		insert(make_pair(x, Value())); // calling default constructor on Value
+		found = find(x); // inefficient but avoids code duplication
+	}
+	return found->second;
+*/
+}
+
+template <typename Key, typename Value, typename Compare, typename Hash>
+void hashmap<Key, Value, Compare, Hash>::rehash(size_t n){
+	//n is smaller or equal so no action
+	if(n <= hash_.numBuckets()) return;
+
+
 }
