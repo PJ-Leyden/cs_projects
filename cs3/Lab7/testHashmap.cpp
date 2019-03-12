@@ -11,39 +11,48 @@ using std::string;
 
 int main() {
    hashmap<int, int> myHash;
-   auto p1 = myHash.insert(pair<int,int>(4, 40));
-   auto p2 = myHash.insert(make_pair(6, 60));
+   auto p1 = myHash.insert(make_pair(1, 10));
+   auto p2 = myHash.insert(make_pair(2, 20));
+   auto p3 = myHash.insert(make_pair(3, 30));
+   auto p4 = myHash.insert(make_pair(4, 40));
+   auto p5 = myHash.insert(make_pair(5, 50));
+   auto p6 = myHash.insert(make_pair(6, 60));
 
-   std::cout << "Key: " << p1.first->first << '\n';
-   std::cout << "Value: " << p1.first->second << '\n';
-   std::cout << "Bool: " << p1.second << '\n';
+   cout << "Key: " << p1.first->first << '\n';
+   cout << "Value: " << p1.first->second << '\n';
+   cout << "Bool: " << p1.second << '\n';
 
-   std::cout << "Key: " << p2.first->first << '\n';
-   std::cout << "Value: " << p2.first->second << '\n';
-   std::cout << "Bool: " << p2.second << '\n';
+   cout << "Key: " << p2.first->first << '\n';
+   cout << "Value: " << p2.first->second << '\n';
+   cout << "Bool: " << p2.second << '\n';
 
-   auto p3 = myHash.insert(pair<int,int>(4, 40));
+   cout << "\nTry inserting a value that already exists.\nBool should be 0.\n\n";
 
-   std::cout << "Key: " << p3.first->first << '\n';
-   std::cout << "Value: " << p3.first->second << '\n';
-   std::cout << "Bool: " << p3.second << '\n';
+   auto p7 = myHash.insert(make_pair(4, 40));
+
+   cout << "Key: " << p7.first->first << '\n';
+   cout << "Value: " << p7.first->second << '\n';
+   cout << "Bool: " << p7.second << "\n\n\n";
 
    // x will have type hashmap<int, int>::value_type*
    auto x = myHash.find(4);
 
    if (x != nullptr) 
-      cout << "4 maps to " << x->second << endl;
+      cout << "Key 4 maps to: " << x->second << '\n';
    else 
-      cout << "cannot find 4 in map" << endl;
+      cout << "Cannot find 4 in map" << '\n';
    
-
-   myHash.erase(4);
-
-   auto x2 = myHash.find(4);
-   if (x2 != nullptr)
-      cout << "4 maps to " << x2->second << endl;
-   else 
-      cout << "cannot find 4 in map" << endl;
+   auto e = myHash.erase(4);
+   if(e.second){
+      cout << "Successfully removed 4.\n";
+      if(e.first != nullptr){
+      	 cout << "The next element is: " << e.first->second << '\n';
+      }else{
+      	 cout << "There is no next element.\n";
+      }
+   }else{
+   	  cout << "Failed to remove 4. Not in the map.\n";
+   }
    
    myHash[4] = 35;
    myHash[4] = 60;

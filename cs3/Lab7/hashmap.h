@@ -170,15 +170,56 @@ hashmap<Key, Value, Compare, Hash>::erase(const Key& x) {
 
 	size_t bucket = hash_.hash(x);
 	auto it = findElement(x, bucket);    // try to find the element
+	int ret_mode = 0;
+
+	if(it != elems_[bucket].end()){
+		--size_;
+		if(size_ == 0){
+			elems_[bucket].erase(it);
+			return make_pair(nullptr, true);	
+		}
+
+		if(++it != elems_[bucket].end()){ // return the next element in the bucket.
+			it = elems_[bucket].erase(--it);
+			return make_pair(&(*it), true);
+		}else{ // return the begin of the next non empty bucket
+			int b = bucket + 1;
+			if(b >= hash_.numBuckets())b = 0;
+			while(elems_[b].empty()){
+				++b;
+			}
+			return make_pair(&(*elems_[b].begin()), true);
+		}
+
+
+	}else{
+		return make_pair(nullptr, false);
+	}
+
+/*
 
 	if (it != elems_[bucket].end()) {    // the element exists, erase it
-		elems_[bucket].erase(it);
 		--size_;
+		if(size == 0)ret_mode = 1;
+		if(ret_mode != 1 && it + 1 == elems_[bucket].end() && bucket + 1 < hash_.numBuckets())ret_mode = 2;
+		if(ret_mode != 1 && it + 1 == elems_[bucket].end() && bucket + 1 >= hash_.numBuckets())ret_mode = 3;
+
+		elems_[bucket].erase(it);
+		
+		switch(ret_mode){
+			case 1:
+				return make_pair(nullptr, true);
+			case 2:
+				return make_pair(elems_[bucket + 1].begin(), true);
+			case 3:
+				return make_pair(elems_[0].begin(), true);
+		}
 
 	//if element doesn't exist
 	}else{
-		return make_pair(*Element(), false);
+		return make_pair(Element(), false);
 	}
+*/
 }
 
 
