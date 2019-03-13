@@ -63,7 +63,6 @@ int main() {
    else 
       cout << "cannot find 4 in map" << endl;
 
-
    myHash.rehash(200);
    std::cout << "rehashed\n";
 /*
