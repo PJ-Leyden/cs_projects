@@ -172,17 +172,23 @@ hashmap<Key, Value, Compare, Hash>::erase(const Key& x) {
 	auto it = findElement(x, bucket);    // try to find the element
 	int ret_mode = 0;
 
+	//if I found the element
 	if(it != elems_[bucket].end()){
+
 		--size_;
+		//if it was the last element left
 		if(size_ == 0){
 			elems_[bucket].erase(it);
 			return make_pair(nullptr, true);	
 		}
 
+		//the element is not the last in the bucket
 		if(++it != elems_[bucket].end()){ // return the next element in the bucket.
 			it = elems_[bucket].erase(--it);
 			return make_pair(&(*it), true);
-		}else{ // return the begin of the next non empty bucket
+
+		//return the begin of the next non empty bucket
+		}else{ 
 			int b = bucket + 1;
 			if(b >= hash_.numBuckets())b = 0;
 			while(elems_[b].empty()){
