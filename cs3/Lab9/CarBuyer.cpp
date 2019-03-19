@@ -12,11 +12,7 @@ using std::cout; using std::endl;
 
 class CarLot{
 public:
-   CarLot();
-   ~CarLot(){
-      if(car4sale_ != nullptr)delete[] car4sale_;
-   }
-   //Car *testDriveCar(){return car4sale_;}
+   CarLot();   //Car *testDriveCar(){return car4sale_;}
 
    // if a car is bought, requests a new one
    Car* buyCar(){ 
@@ -35,8 +31,8 @@ public:
    int lotSize(){ return LOT_SIZE; }
 		     
 private:
-          Car                  *car4sale_; //array of cars for sale
-   const  int                  LOT_SIZE = 10;
+   static const  int                  LOT_SIZE = 10;
+          Car                  car4sale_[LOT_SIZE]; //array of cars for sale
           vector<CarFactory*>  factories_;
    static int                  next; 
 };
@@ -52,7 +48,6 @@ CarLot::CarLot(){
    factories_.push_back(new ToyotaFactory());
 
    // set the lot with random cars
-   car4sale_ = new Car[LOT_SIZE];
    for(int i = 0; i < LOT_SIZE; ++i){
       car4sale_[i] = *(factories_[rand() % factories_.size()] -> requestCar());
    }
