@@ -13,6 +13,9 @@ using std::cout; using std::endl;
 class CarLot{
 public:
    CarLot();
+   ~CarLot(){
+      if(car4sale_ != nullptr)delete[] car4sale_;
+   }
    //Car *testDriveCar(){return car4sale_;}
 
    // if a car is bought, requests a new one
