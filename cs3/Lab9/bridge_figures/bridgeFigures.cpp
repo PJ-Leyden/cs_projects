@@ -11,20 +11,21 @@ using std::cout; using std::endl; using std::cin;
 // abstract body
 class Fill{
 public:
-   Fill(char fillChar):fillChar_(fillChar){}
+   Fill(char bc, char ic):fillBorder_(bc), fillInternal_(ic){}
    virtual char getBorder()=0;
    virtual char getInternal()=0;
    virtual ~Fill() {}
 protected:
-   char fillChar_;
+   char fillBorder_;
+   char fillInternal_;
 };
 
 // concrete body
 class Hollow: public Fill{
 public:
-   Hollow(char fillChar):Fill(fillChar){}
-   char getBorder() override {return fillChar_;}
-   char getInternal() override {return ' ';}
+   Hollow(char bc):Fill(bc, ' '){}
+   char getBorder() override {return fillBorder_;}
+   char getInternal() override {return fillInternal_;}
    ~Hollow(){}
 };
 
@@ -33,10 +34,17 @@ public:
 // another concrete body
 class Filled: public Fill {
 public:
-   Filled(char fillChar):Fill(fillChar){}
-   char getBorder() override {return fillChar_;}
-   char getInternal() override {return fillChar_;}
+   Filled(char fillChar):Fill(fillChar, fillChar){}
+   char getBorder() override {return fillBorder_;}
+   char getInternal() override {return fillInternal_;}
    ~Filled(){}
+};
+
+class EnhancedFill: public Fill {
+public:
+   EnhancedFill(char fb, char fi):Fill(fb, fi){}
+   char getBorder() override {return fillBorder_;}
+   char getInternal() override {return fillInternal_;}
 };
 
 // abstract handle
@@ -45,11 +53,18 @@ public:
    Figure(int size, Fill* fill): size_(size), 
 				 fill_(fill){}
    virtual void draw() =0;
+   void changeFill(Fill*);
+
    virtual ~Figure(){}
 protected:
    int size_;
    Fill *fill_;
 };
+
+void Figure::changeFill(Fill *f){
+	if(fill_ != nullptr){delete fill_;}
+	fill_ = f;
+}
 
 // concrete handle
 class Square: public Figure{
@@ -73,7 +88,7 @@ void Square::draw(){
 
 
 int main(){
-   /*
+   
    Fill* hollowPaintY = new Hollow('Y');
    Fill* filledPaintStar = new Filled('*');
 
@@ -84,7 +99,7 @@ int main(){
    smallBox->draw();
    cout << endl;
    bigBox -> draw();
-   */
+   
    
    // ask user for figure parameters
    cout << "Enter fill character: "; 
@@ -98,13 +113,13 @@ int main(){
 	       static_cast<Fill *>(new Filled(fchar)):
 	       static_cast<Fill *>(new Hollow(fchar))
      				                     ); 
-  
-   /*
-   Figure *userBox = ifFilled == 'f'?
-      new Square(size, new Filled(fchar)):
-      new Square(size, new Hollow(fchar));
-   */
    userBox -> draw();
    cout << endl;
    
+   delete userBox;
+   userBox = new Square(size, static_cast<Fill *>(new EnhancedFill(fchar, 'g')));
+   userBox -> draw();
+   cout << endl;
+
+   return 0;
 }

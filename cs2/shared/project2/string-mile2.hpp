@@ -52,9 +52,9 @@ public:
     friend  std::istream& operator>>(std::istream&, String&);
 
 private:
-            String        (int);                            //String(10) - size of 10.
-            String        (int, const char[]);              //String(10, "abc") - Size 10 with "abc"
-    void    resetCapacity (int);                            //Resets capacity to be N
+            String        (int);                            //String(10) - capacity 10, empty string
+            String        (int, const char[]);              //String(10, "abc") - capacity 10 with "abc"
+    void    resetCapacity (int);                            //Resets capacity to N, keeps string intact 
 
     char    *str;                                           //Pointer to char[]
     int     stringSize;                                     //Size includes NULL terminator
