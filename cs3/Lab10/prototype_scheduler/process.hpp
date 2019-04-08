@@ -21,6 +21,9 @@ public:
 	void event_wait();
 	void event_complete();
 	void scheduler_dispatch();
+	int get_process_id(){return process_id;}
+
+	Process* clone();
 
 	void report(std::ostream&);
 

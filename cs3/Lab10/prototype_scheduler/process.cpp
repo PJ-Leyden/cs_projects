@@ -32,6 +32,11 @@ void Process::scheduler_dispatch(){
 	state_->scheduler_dispatch(this);
 }
 
+Process* Process::clone(){
+	Process *p = new Process();
+	return p;
+}
+
 void Process::report(std::ostream &out){
 	out << "Process " << process_id << " is ";
 	state_->report(out);
