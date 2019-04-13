@@ -2,6 +2,7 @@
 // Mikhail Nesterenko
 // 11/15/2016
 
+
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -9,9 +10,11 @@
 
 enum DrinkType {small, medium, large};
 
+
 class Drink{
 public:
    Drink(DrinkType type=small, double price=0):
+
         type_(type), price_(price){}
 
    virtual double      getPrice() const = 0;
@@ -22,10 +25,12 @@ protected:
 	std::string name_;
     double      price_;
     DrinkType   type_;
+
 };
 
 class Coffee : public Drink {
 public:
+
 	Coffee(): 
 		Drink(){}
 
@@ -42,4 +47,5 @@ public:
 private:
 	std::vector<char> toppings_;
 	std::string level_;
+
 };

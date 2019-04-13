@@ -1,6 +1,8 @@
 #include "drink.hpp"
 
+
 double Coffee::getPrice() const{
+
 	return price_;
 }
 
@@ -19,12 +21,15 @@ std::string Coffee::getSize() const{
 	}
 }
 
+
 void Coffee::order_coffee(){
+
 	char size;
 	char topping;
 	std::cout << "Welcome to Coffee Shack, can I get you [l]arge, [m]edium, or [s]mall coffee? ";
 	std::cin >> size;
 	std::cout << '\n';
+
 	level_ = "low";
 	switch(size){
 		case 'l':
@@ -42,12 +47,14 @@ void Coffee::order_coffee(){
 	}
 	bool mid = false;
 	bool high = false;
+
 	do{
 		std::cout << "Would you like to add [s]prinkles, [c]aramel, milk [f]oam, [i]ce or [n]ot? ";
 		std::cin >> topping;
 		std::cout << '\n';
 		switch(topping){
 			case 's':
+
 				toppings_.push_back('s');
 				price_ += .5;
 				mid = true;
@@ -69,6 +76,7 @@ void Coffee::order_coffee(){
 				toppings_.push_back('i');
 				price_ += .1;
 				mid = true;
+
 				break;
 
 			default:
@@ -76,6 +84,7 @@ void Coffee::order_coffee(){
 				break;
 		}
 	}while(topping != 'n');
+
 
 	if(mid){
 		level_ = "mid";
@@ -90,6 +99,7 @@ void Coffee::order_coffee(){
 
 void Coffee::print_toppings() const{
 	for(char c : toppings_){
+
 		switch(c){
 			case 's':
 				std::cout << "sprinkles, ";
@@ -108,6 +118,7 @@ void Coffee::print_toppings() const{
 				break;
 		}
 	}
+
 }
 
 bool Coffee::operator==(const Coffee &org){
@@ -115,3 +126,4 @@ bool Coffee::operator==(const Coffee &org){
 }
 
 std::string Coffee::getLevel() const { return level_; }
+

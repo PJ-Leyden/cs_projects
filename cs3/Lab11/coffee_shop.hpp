@@ -45,4 +45,5 @@ public:
 
 	Coffee buy_drink();
 	void   run_shop();
+
 };

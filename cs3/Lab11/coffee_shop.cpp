@@ -1,5 +1,6 @@
 #include "coffee_shop.hpp"
 
+
 void Customer::notify(std::string n){
 	if(n == name_){
 		std::cout << name_ << " colleted there drink.\n";
@@ -121,5 +122,4 @@ void Coffee_Shop::run_shop(){
 
 	}while(repeat != 'n');
 }
-
 
