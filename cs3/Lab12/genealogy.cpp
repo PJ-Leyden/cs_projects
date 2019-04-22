@@ -86,8 +86,12 @@ void Woman::accept(PersonVisitor *visitor){
 
    visitor->visit(this);
    // traversing descendants
-   for(auto child : children_) 
-	  child->accept(visitor);
+   for(auto child : children_){ 
+	   child->accept(visitor);
+      if(child->getSpouse() != nullptr){
+         child->getSpouse()->accept(visitor);
+      }
+   }
 }
 
 // concrete visitors
