@@ -75,11 +75,11 @@ class PyGUI:
 		self.notebook = ttk.Notebook(self.root)
 		self.notebook.grid()
 
-		self.database_setup = Frame(self.notebook)
-		self.notebook.add(self.database_setup, text="Database")
+		self.tab_1 = Frame(self.notebook)
+		self.notebook.add(self.tab_1, text="Database")
 
 		self.tab_setup = Frame(self.notebook)
-		self.notebook.add(self.tab_setup, text="Import XML")
+		self.notebook.add(self.tab_setup, text="TACO")
 		'''
 
 		#Menu/Toolbar
