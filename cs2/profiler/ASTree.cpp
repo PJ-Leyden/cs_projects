@@ -255,7 +255,9 @@ void AST::mainHeader(std::vector<std::string>& profileNames, std::vector<std::st
     if(foundInclude){
         child.insert(it, new AST(token, "#include \"profile.hpp\"\n"));//takes what type it is... it is of type AST* so...
         for(size_t i = 0; i < profileNames.size(); ++i){
-            child.insert( it, new AST(token, "profile " + profileNames[i] + "(\"" + files[i].substr(0, files[i].find(".xml")) + "\");\n") );
+            child.insert( it, new AST(token, 
+                "profile " + profileNames[i] + 
+                "(\"" + files[i].substr(0, files[i].find(".xml")) + "\");\n") );
         }
     }
 }

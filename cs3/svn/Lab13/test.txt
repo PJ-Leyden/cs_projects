@@ -1,0 +1,51 @@
+Script started on Tue 23 Apr 2019 04:35:04 PM EDT
+[pleyden@wasp Lab13]$ exitclear./doc g++ -std=c++11 -odoc documenter.cpp [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./doc [Kg++ -std=c++11 -odoc documenter.cpp 
+[pleyden@wasp Lab13]$ ./doc 
+1. Lorem Ipsum is simply dummy text of the printing and typesetting
+2. industry. Lorem Ipsum has been the industry's standard dummy text
+3. ever since the 1500s, when an unknown printer took a galley of
+4. type and scrambled it to make a type specimen book. It has
+5. survived five centuries.
+
+*** Menu ***
+i: Insert Line
+e: Erase Line
+u: Undo Last Command
+c: Make Checkpoint
+b: Rollback
+h: History
+r: Redo
+q: Quit
+
+	Enter option: i
+
+Enter line number: 2
+Enter line:
+skdbgjwehbvjehv
+
+
+1. Lorem Ipsum is simply dummy text of the printing and typesetting
+2. skdbgjwehbvjehv
+3. industry. Lorem Ipsum has been the industry's standard dummy text
+4. ever since the 1500s, when an unknown printer took a galley of
+5. type and scrambled it to make a type specimen book. It has
+6. survived five centuries.
+
+*** Menu ***
+i: Insert Line
+e: Erase Line
+u: Undo Last Command
+c: Make Checkpoint
+b: Rollback
+h: History
+r: Redo
+q: Quit
+
+	Enter option: q
+
+
+
+[pleyden@wasp Lab13]$ exit
+exit
+
+Script done on Tue 23 Apr 2019 04:35:28 PM EDT
