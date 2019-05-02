@@ -1,0 +1,182 @@
+		PROGRAMMING THESAURUS
+
+standard-related
+  undefined - not defined in a standard
+  unspecified - defined in the standard but left without specific result
+  implementation-defined - depends on the implementation ex: sizeof(int)
+
+procedural programming - programming without classes, i.e. using
+	   standalone functions, primitive types and simple control
+	   structures
+
+standalone function - does not belong to a class
+
+primitive/basic/built-in data types - string, int, bool, char, double
+
+scope - place in program where particular identifier may be used
+
+(variable) shadowing - the outer scope variable becomes invisible when
+	   inner scope variable has the same name
+
+synonym (for type) - another name for a type defined by "typedef"
+
+chained/stacked operator - operator that can be used multiple times in
+			 a single statement
+
+class fields/attributes
+
+constant - particular construct (variable) may not change its value
+lvalue - expression that can be used on the left-hand-side of the assignment
+
+actual parameter - argument (of a function)
+formal parameter - parameter
+
+program entry point - main() function
+
+side effect (of a function or expression) - if in addition to
+     returning a value, it has an observable action, such as modifying
+     state of a variable
+
+idiom - common way of solving a simple, recurring task
+
+function signature/prototype - specifies return value, function name,
+	 type and number of parameters
+
+function implementation/body - code for the function
+
+function overloading - multiple different functions within the same
+	 scope provided that they have different signatures
+function overriding - replacing the function of base class with
+	 the function of derived class
+
+
+resolution (of function call) - compile time process of associating
+	   function invocation with function definition
+
+client/caller - function that invokes another function, in design patterns -
+	      the code (function) that uses the pattern
+
+class attributes(UML term)/fields - member variables
+class operators (UML)/methods - member functions
+features - member variables and member functions
+
+(class) interface - public class features
+(class) implementation - private class features
+
+query - accessor member function
+modifier - mutator member function
+
+class access modifiers:  public, protected, private
+
+inline - request to compiler to replace invocation with implementation
+
+shallow copy - memberwise copying of object attributes
+deep copy - recursive (including attributes) copying of entire object
+
+scalar variable - holds a single element
+array variable - holds a list of elements
+
+terse code (style) - short names, compact code
+verbose/sparse code (style) - longer names, more explanations in code
+
+lazy evaluation/instantiation - operation is done as result is needed 
+     			      (instantiation is at first use)
+eager evaluation/instantiation - operation is done when requested 
+
+techniques of solving recurring tasks
+
+-  idiom - low-level language dependent technique
+
+-  programming pattern - mid-level, contains: name, problem, solution,
+  	    consequences (benefits/side-effects, etc.) language independent
+
+-  framework - abstract (high-level), uses several design patterns,
+     	       leaves users (programmers) to provide code to specify behavior
+
+inheritance notation
+
+  superclass - base class, generalization of the derived class, parent class
+  subclass - derived class, specialization of the base class, child class
+
+early (compile-time) binding - resolving function by compiler
+late (run-time) binding - resolving function by program itself on the
+     		basis of object class pointed-to
+
+
+(object) type - a set of methods that are applicable to an object. Realized
+	 as Class interface (as opposed to class implementation)
+
+abstract function (method/operation) - defines only signature but not implementation
+    realized in C++ using pure virtual functions
+concrete function - function with provided implementation
+
+abstract class - a class with at least one abstract function
+abstract interface - all public functions are abstract
+
+downcasting - changing pointer (or reference) type to base classes
+	      (moving down the inheritance tree)
+
+upcasting - changing pointer (or reference) type to derived classes
+	    (moving up the inheritance tree)
+
+factory - object for creating other objects 
+
+covariant return type - return type of the overriding function that
+	  	 is a subclass (of the basic class), in general
+		 covariant proceeds down the inheritance hierarchy
+
+template instantiation - compiler substituting actual type for
+	 template type parameter and generating executable code on the
+	 basis of template
+
+template deduction - determining by the compiler the type parameter
+	 based on argument type, context
+template specialization - alternative template implementation
+	 of templates (or methods) for specific types
+
+
+STL TERMS
+
+callback - reference to code (function) to be used in another function
+	 ex: function pointers, functors, lambda expressions
+lambda expression - nameless function often used inline as a callback
+       parameter in another function
+functor (function object) - an object that overloads function call operator
+	and may be used as callback
+binder (function adapter) - a specialized function that creates a function
+       by assigning (binding) a particular parameter of another function
+       to a value
+
+
+OBJECT-ORIENTED PROGRAMMING/UML
+
+association - relationship between classes that allow one object to cause 
+	      another to perform action on its behalf. Causation means "sending
+	      a message", "invoking a method", or "calling a member function"
+	      on the controlled object. Usually implemented as pointer or reference
+	      UML notation: line, if unidirectional - with arrow
+
+aggregation - special kind of association of whole/part of relation
+	      where lifetime is not the same: e.g. worker is a part of
+	      a company (company closes workers still exist) dentoted
+	      by hollow diamond in UML
+
+composition - kind of aggregation where object lifetimes are the same:
+	      composing objects do not exist without composer (company
+	      closes all departments close)
+
+abstraction - standardize object behavior and interaction through
+	      interface and (abstract) the
+	      implementation. Encapsulation is used to package and
+	      hide the implementation.
+
+encapsulation - a language mechanism of restitching access to some of
+	      the object's components. May implement information
+	      hiding
+
+information hiding - the principle segregation of design decisions
+	    that are most likely to change from the rest of the
+	    program by providing stable interface. Encapsulation is
+	    the technique of achieving IH
+
+delegation - one object relies on another to provide a specified set of functionalists

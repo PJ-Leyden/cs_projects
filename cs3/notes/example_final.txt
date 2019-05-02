@@ -1,0 +1,118 @@
+		CS3: PROGRAMMING PATTERNS
+
+		         EXAM #2
+
+name: first ________________   last _____________________
+
+The number of points for each question is given in square
+brackets. State your assumptions. Explain your code.
+
+1. [10] Draw a UML class diagram for the following class definitions.
+
+   class A{
+   };
+
+   class B{
+   public:
+     virtual int myfunc();
+   protected:
+      int x_;
+   private:
+      A* a_;
+   };
+
+   class C: public B{
+   public:
+      int myfunc();
+   };
+
+
+2. [15] Explain the purpose of Singleton Design Pattern. Differentiate
+   between Meyer's and Classic Singleton Design Pattern
+   Implementation. Provide code for the instance() function for one the
+   implementations and explain the operation of this function.
+
+3. [10] Describe what virtual function is. Explain polymorphism. Differentiate
+   between run-time and compile-time binding.  Given following code in main()
+
+      A *p = new B;
+      p->myfunc():
+
+   Complete below class definitions such that myfunc() invoked
+   above is a feature of class B. Explain your code.
+
+      class A{
+      };
+
+      class B: public A{
+      };
+
+
+4. [15] Differentiate between class interface and class
+   implementation. Contrast public and private inheritance with
+   respect to class interface and implementation.
+
+   Describe Adapter Design Pattern. Describe Adapter, Adaptee and
+   Target Interface classes. Given the code below, provide definition
+   of the Adapter class for the class-based Adapter design
+   pattern:state class inheritance and provide myFunc() implementation
+   in terms of yourFunc(), the implementation is of your
+   choice. Provide example of client usage of your pattern (invocation
+   of the implemented function).
+
+   class TargetInterface{
+   public:
+        void myFunc();
+   };
+
+   class Adaptee{
+   public:
+        void yourFunc();
+   }
+
+
+5. [15] Explain the purpose of State design pattern. Explain the purpose of
+  context class, abstract state class and concrete state class. Given
+  the code below, explain the relationship between changeState in
+  class Context and class State. Provide outside (of class)
+  implementations of both functions.
+
+   class Context{
+        void changeState(State *s);
+   private:
+        state* s_;
+   };
+
+   class State{
+        void changeState(Context *c, State *s);
+   };
+
+
+6. [10] Explain the purpose of Prototype design pattern. Explain what
+   function clone() does. Given the following abstract class, provide
+   a concrete implementation (define the clone() implementation) and
+   provide an example of use by a client.
+
+   class Prototype{
+   Public:
+       virtual Prototype* clone();
+   };
+
+7. [15] Explain the purpose of Decorator Design Pattern.  Write code
+   that decorates the below ChrsitmasTree with ornaments (modifies the
+   stored string). Give example code that invokes show() to print out
+   the decorated tree.
+
+      class ChristmasTree{
+      public:
+        ChristmasTree:tree_("_\|/_"){} // initializes the tree
+        virtual string show() const{return tree_;}
+      private:
+         string tree_;
+      };
+
+
+8. [10] Explain the purpose of Observer Design Pattern. Explain why it
+   is also called Publish/Subscribe. That is, what is being published
+   and subscribed to in this design pattern?  Give an example
+   programming task where this pattern might be used.

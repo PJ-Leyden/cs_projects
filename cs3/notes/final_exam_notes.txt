@@ -1,0 +1,73 @@
+		CS3
+
+   CONSULTATION TIME, FINAL EXAM TIME, STUDY TOPICS
+
+Final exam:     7:45-10:00am Mon May 6, BOW 206
+Consultation: 	Friday, Friday, May 3, 1-5pm, MSB 356
+
+		
+TOPICS (not an exhaustive list)
+
+Notions
+
+- UML class, object and state diagrams
+- base/derived classes, inheritance, virtual functions, abstract
+  functions, abstract classes, access methods
+  invoking overriden function in an overriding function
+- overloading vs. overriding
+- idioms vs. design patterns vs. frameworks
+- multiple inheritance; private vs. public inheritance, usage
+- type covariance
+- push and pull implementation methods
+- (forward) class declaration, elaborated type specifier
+- delegation
+- C++11 style type casting, static_cast vs. dynamic_cast; reinterpret_cast; const_cast
+- C++11 enum classes
+- resource pool: reasons, situations
+- multiple, double dispatch
+- PIMPL, nested classes
+- smart pointers: unique_ptr, shared_ptr, reference cycle,
+  		  weak_ptr
+
+Patterns
+
+- singleton: Meyers and classic versions, precluding object copying,
+  specifying behavior at shutdown
+
+- template method: hooks, primitive operations, template
+  method
+
+- abstract factory: factory method, abstract vs. concrete
+  factories/products
+
+- bridge: delegation, handle, body
+
+- adapter: adaptee, adapter, interface; class and object
+  implementation
+
+- prototype: clone
+
+- state: context, state abstract/concrete
+
+- decorator: decoration, component
+
+- observer: subject, observer, subscribing, registry,
+  message (notification)
+
+- visitor: concrete/abstract element/visitor
+
+- composite: component, composite, leaf
+
+- registry: canonical vs. non-canonical pattern, use, implementation
+
+- chain of responsibility: handler
+
+- command: (abstract/concrete) command, client, receiver, invoker
+  	   execute()/unexecute()
+
+- memento: originator, memento, caretaker
+
+- strategy: context, strategy, push/pull
+
+- flyweight:  intrinsic/extrinsic state, abstract/concrete flyweight, client, factory
+

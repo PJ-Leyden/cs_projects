@@ -145,11 +145,15 @@ AST::~AST(){
 // Copy Constructor for AST
 //
 AST::AST(const AST& actual) {
+
+
     nodeType = actual.nodeType;
     tag = actual.tag;
     closeTag = actual.closeTag;
     text = actual.text;
-    for(std::list<AST*>::const_iterator itr = actual.child.begin(); itr != actual.child.end(); ++itr){
+
+    std::list<AST*>::const_iterator itr;
+    for(itr = actual.child.begin(); itr != actual.child.end(); ++itr){
         child.push_back(new AST( **itr ));
     }
 }
