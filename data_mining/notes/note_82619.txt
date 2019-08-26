@@ -1,0 +1,53 @@
+Name: P.J. Leyden
+File: note_82619.txt
+Date: Aug 26th, 2019
+
+Syllabus Day
+============
+A is 90 or higher. Max is 115.
+Form a team of 3-4 members for Project and Presentation
+Distribute work evenly
+
+Explosion in the amount of data has lead to the need for ways to mine that data efficiently. 
+Drowning in data, but starved for knowledge. 
+
+Major sources of info
+ - Buisness : Web, E-Commerce, Transactions, Stocks, etc...
+ - Science  : Remote sensing, bioinformatics, scientific simulation, etc... 
+ - Society  : News, digital cameras, YouTube, Facebook, etc...
+
+Basically we have a SHIT load of data and we gotta do something with it. 
+
+We want to extract interesting (non-trivial, implicit, previously unknown and potentially useful) patterns
+of knowledge from the idiotic amount of data. 
+
+KDD (Knowledge Discovery in Databases)
+Knowledge Extraction, Data/Pattern Analysis, Data Archeology, Data Dredging, Information Harvesting, Buisness Intelligence etc...
+NOT Data Mining
+Simple Search and Query Processing
+Expert Systems (Deductive)
+
+ISN'T
+ - Look Up Phone Number in Directory
+ - Query a Web Search engine for the word amazon
+IS
+ - Certain Names are more prevlent in certain US locations
+ - Group together similar docs returned by the search engine according to context (Rainforest, Amazon.com)
+
+Database===============>Data Warehouse===========>Task-Relavanet Data=============>Found Data====================>Knowledge
+         Data Cleaning                 Selection                      Data Mining             Pattern Evaluation
+
+Knowledge found is used in Selection, Data Mining and Pattern Evaluation. 
+
+A Web Mining Framework
+ - Data Cleaning
+ - Data Integration from Multiple Sources
+ - Warehouse the Data
+ - Data Cube Construction
+ - Data Selection for Mining
+ - Mining
+ - Presentation of Results
+ - Patterns/Knowledge to be stored or used
+
+ Data Mining       => Data Analyst
+ Data Presentation => Buisness Analyst

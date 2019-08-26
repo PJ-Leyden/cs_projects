@@ -1,0 +1,49 @@
+Creational Patterns
+	1  - Abstract Factory
+	   	    - For when the creation of objects needs to be handled
+	   	    carefully. Provide an interface for the creation of related objects
+	   	    without specifiing their concrete classes. 
+	2  - Prototype
+			- For avoiding expensive creations and destructions. Little difference between 
+			newly created objects. 
+	3  - Singleton
+			- Ensure a class has only one instance and that there is global access. 
+
+Structural Patterns
+	4  - Adapter
+			- Convert the interface of a class into another interface clients expect.  
+	5  - Bridge
+			- Decouple an abstraction from its implementation so that the two can vary independetnt.  
+	6  - Composite
+			- Compose objects into tree structures to represent part-whole heirarchies. Allows the client to treat objects and collections of objects uniformially. 
+	7  - Decorator
+			- Attach additional responsibilities to an object dynamically. 
+	8  - Flyweight
+			- Use sharing to support a large number of fine-grained objects efficiently.  
+	9  - Register
+			- A well known object that other objects can use to look up other objects. 
+
+Behavioral
+	10 - Chain of Responsibility
+			- Avoid coupling the sender of a request with it's reciver by allowing an object
+			more than one chance to handle a request. Have a chain of objects and keep
+			sending along the request until an object handles it. 
+	11 - Command
+			- Encapsulate a request as an object thereby letting you parameterize clients with
+			different requests, queue or log requests, and supportun-doable operations. 
+	12 - Memento
+			- Without violating encapsulation, capture and externalize the internal state of an
+			object so that the object can be restored to that state. 
+	13 - Observer
+			- Define a one-to-many relationship so that when the subject (one) changes the
+			observers (many) are notified automatically. 
+	14 - State
+			- Allow an object to alter its behaviour when its internal state changes. The object
+			will appear to change it's class. 
+			- Example: When Zork changes state, all of his methods (Eat, Sleep) change what they do
+	15 - Strategy
+			- Define a family of algorithms, encapsulate each one, and make them interchangable. Allows the algorithm to vary independently from clients that use it. 
+	16 - Template Method
+			- Define the skeleton of an algorithm in an operation deferring some steps to subclasses. Allows subclasses to redefine certain steps of an algorithm without changing structure.
+	17 - Visitor
+			- Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates. 
