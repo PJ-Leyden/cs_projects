@@ -1,6 +1,3 @@
 [submodule "ai/ai_group_project"]
 	path = ai/ai_group_project
 	url = https://github.com/PJ-Leyden/ai_group_project.git
-[submodule "hacksu/tkinter_demo"]
-	path = hacksu/tkinter_demo
-	url = git@github.com:PJ-Leyden/tkinter_demo.git
