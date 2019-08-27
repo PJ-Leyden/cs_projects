@@ -1,3 +1,6 @@
 [submodule "ai/ai_group_project"]
 	path = ai/ai_group_project
 	url = https://github.com/PJ-Leyden/ai_group_project.git
+[submodule "intro_to_game_programming/igp_classproject"]
+	path = intro_to_game_programming/igp_classproject
+	url = git@github.com:PJ-Leyden/igp_classproject.git
