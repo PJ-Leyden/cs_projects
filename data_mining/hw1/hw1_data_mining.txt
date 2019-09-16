@@ -1,0 +1,35 @@
+1)
+Data Mining is the process of sifting through large data sets and trying to extract some kind of new and hopefully relevent information. 
+
+2)
+ - Medical Image Classification - The problem here is to more effectively detect tumors in the body. The solution is to use data mining to find associations that can be used ot help train neural networks. This is a classification problem. 
+
+ - Financial Fraud Detection - The problem here is to effectively detect instances of finacnial fraud. The solution is to use data mining on finacial transaction daat and try to pull associations from the data to more accurately detect anamolies that may lead to finacial. This is a deviation detection problem.
+
+ - Customer Relationship Managment - The problem here is finding patterns of effective relationship managment. The solution is to data mine through data and find correlations between good relationship managment and particular practices. This is an association rule discovery problem.  
+
+REFERENCES
+[1] Antonie, M., Zaiane, O. and Coman, A. (2001). Application of Data Mining Techniques for Medical Image Classification. In: Second International Workshop on Multimedia Data Mining. Springer-Verlag Berlin, Heidelberg.
+[2] Ngai, E., Hu, Y., Wong, Y., Chen, Y. and Sun, X. (2011). The application of data mining techniques in financial fraud detection: A classification framework and an academic review of literature. Decision Support Systems, 50(3), pp.559-569.
+[3] Ngai, E., Xiu, L. and Chau, D. (2009). Application of data mining techniques in customer relationship management: A literature review and classification. Expert Systems with Applications, 36(2), pp.2592-2602.
+
+
+3)
+a - No. This is a trivial task and does not yield new knowledge. 
+b - Yes. We are gleaming new information by finding potential correlations between a persons last name and there address. 
+c - No. This is again a trivial task, a simple SQL statement. We are not finding new knowledge we are simple getting a subset of the data.  
+d - Yes. This is a clustering task. We are potentially finding new information by clustering objects together using a particular attribute and then observing the other attributes of clustered objects. 
+e - Yes. This is a predictive task, specifically regression. The goal is to determine a potential pattern in data to help predict future events. 
+
+
+4)
+Clustering is the idea of taking a set of data points that all have attributes associated with them 
+and grouping based upon similar attributes. This will let us possibly gleam new information by
+looking at the clustered data points and looking at attributes they don't have in common and deciding
+if they may also have these attributes. AN example of this problem might be medical image
+processing. For instance, you could have patient condition details associated with there images. You
+could then run through all the images and cluster them on the similaroty of the images. Finally you
+could go through the clusters and find associations between non-image attributes giving you new
+information about coorilations between clustered objects. 
+
+

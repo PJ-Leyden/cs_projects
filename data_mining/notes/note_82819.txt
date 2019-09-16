@@ -1,0 +1,53 @@
+Name: P.J. Leyden
+File: note_82819.txt
+Date: Aug 28th, 2019
+
+Day 2
+=====
+Data Mining can occur on different types of Data. 
+For example:
+	 - Database Oriented Data Sets
+    	 - Relational Database, Data Warehouse, Transactional Database
+	 - Advanced Sets
+		 - Data Streams/Sensor Data
+		 - Time Series Data, Temporal Data, Sequence Data (Bio Data)
+		 - Structure Data, Graphs, Social Networks, Multilinked Data
+		 - Object Relational Database
+		 - Heterogenous Databases and Legacy Database
+		 - Spatial Data, Spatiotemporal Data
+		 - Multimedia Databases
+		 - Text Databases
+		 - Internet (WWW)
+		 - Graph Databases
+
+Data Mining Tasks
+	 - Classifiication [Predicitive]
+		 - Given a collection of records (training set)
+    	 - Each record contains a set of attributes as a function. One of which is the class.
+		 - The goal is that we can PREDICTE the classes of previously unseen records.
+		 - Case 1
+		 	 - Fraud Detection = Use credit card transactions to determine if a credit card purchase is real. 
+
+	 - Clustering [Descriptive]
+ 	 	 - Given a set of data points, each having a set of attributes, and a similar measure among them, find clusters that
+ 		 	 - Data points in one cluster are more similar to one another.
+ 		 - Market Segmentation = Subdivide the market into distinct subsets of customers where any subset could conceivably be selected as a 
+ 		   market target to be reached with a particular marketing strategy.  
+
+ 	 - Association Rule Discovery [Descriptive]
+ 	 	 - Discover dependency rules based on a given set of data.
+ 	 	 - If .... Then ....  
+ 	 - Sequential Pattern Discovery [Descriptive]
+ 	 - Regression [Predictive]
+ 	 	 - Predict the value of a given continuous valued variable based on the values of other variables assuming a linear model. 
+ 		 - Deviation Detection [Predictive]
+
+Evaluation of Knowledge
+	 - Directly mine only the interesting stuff. 
+	 - Requires some domain knowledge as some patterns may be of no interest.  
+	 - Measures
+	 	 - Descriptive
+	 	 - Coverage 
+	 	 - Typicality vs. Novelty
+	 	 - Accuracy
+	 	 - Timeliness
