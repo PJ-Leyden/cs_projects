@@ -20,13 +20,21 @@ var image1 = new Array()
         for ( var j = 0; j < texSize; j++) 
            image1[i][j] = new Float32Array(4);
     for (var i =0; i<texSize; i++) for (var j=0; j<texSize; j++) {
-        var c = (((i & 0x8) == 0) ^ ((j & 0x8)  == 0));
-        image1[i][j] = [c, c, c, 1];
+        //var c = (((i & 0x8) == 0) ^ ((j & 0x8)  == 0));
+        image1[i][j] = [150, 150, 150, 1];
     }
     for (var i = (texSize - tri_box_size)/2; i<texSize - (texSize - tri_box_size)/2; i++){
-    	for (var j=(texSize - tri_box_size)/2; j<texSize - (texSize - tri_box_size)/2; j++) {
-        	var c = 0x00FF00;
-        	image1[i][j] = [c, c, c, 1];
+    	for (var j=(texSize - tri_box_size)/2; j<texSize - (texSize - tri_box_size)/2; j++){
+
+    		image1[i][j] = [100, 100, 100, .7];
+
+    		if(j < (texSize/2) - (i - (texSize - tri_box_size)/2)/2.5 || 
+    		   j > (texSize/2) + (i - (texSize - tri_box_size)/2)/2.5 ||
+    		   i <= ((texSize - tri_box_size)/2) + 2 ||
+    		   i >= (texSize - (texSize - tri_box_size)/2) - 3){
+    			image1[i][j] = [150, 150, 150, 1];
+    		}
+
     	}
 	}
 
