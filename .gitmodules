@@ -7,3 +7,7 @@
 [submodule "data_mining/reddit_miner"]
 	path = data_mining/reddit_miner
 	url = git@github.com:PJ-Leyden/reddit_miner.git
+[submodule "data_mining/hw2/apriori_implementation"]
+	path = data_mining/hw2/apriori_implementation
+	url = git@github.com:PJ-Leyden/apriori_implementation.git
+
