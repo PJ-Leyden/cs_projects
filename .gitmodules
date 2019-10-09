@@ -4,3 +4,6 @@
 [submodule "intro_to_game_programming/igp_classproject"]
 	path = intro_to_game_programming/igp_classproject
 	url = git@github.com:PJ-Leyden/igp_classproject.git
+[submodule "data_mining/reddit_miner"]
+	path = data_mining/reddit_miner
+	url = git@github.com:PJ-Leyden/reddit_miner.git
