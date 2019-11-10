@@ -28,10 +28,19 @@ public:
       return result;
    }
 
+   void print(){
+      std::cout << "Current Lot: " << next << '\n';
+      for(int i = 0; i < LOT_SIZE; ++i){
+         std::cout << car4sale_[i].getMake() << " ";
+         std::cout << car4sale_[i].getModel() << '\n';
+      }
+      std::cout << '\n';
+   }
+
    int lotSize(){ return LOT_SIZE; }
 		     
 private:
-   static const  int                  LOT_SIZE = 10;
+   static const  int           LOT_SIZE = 10;
           Car                  car4sale_[LOT_SIZE]; //array of cars for sale
           vector<CarFactory*>  factories_;
    static int                  next; 
@@ -75,6 +84,7 @@ void toyotaLover(int id){
       if (toBuy->getMake() == "Toyota"){
          cout << " love it! buying it!" << endl;
          carLotPtr -> buyCar();
+         carLotPtr->print();
          break;
       } else
          cout << " did not like it!" << endl;
@@ -99,6 +109,7 @@ void fordLover(int id){
       if (toBuy->getMake() == "Ford"){
          cout << " love it! buying it!" << endl;
          carLotPtr -> buyCar();
+         carLotPtr->print();
          break;
       } else
          cout << " did not like it!" << endl;
