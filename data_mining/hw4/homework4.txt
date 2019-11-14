@@ -56,7 +56,12 @@ Homework 4
 	Output: data points wili be labeled with their cluster id
 
 	divisive(k, datapoints):
-		
+		num_clusters = 2
+		k_means(2, datapoints) //initial split of the system
+		while num_clusters < k
+			x = random cluster id
+			particular_cluster = datapoints.cluster(x)
+			k_means(2, particular_cluster)
 
 
 
