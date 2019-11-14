@@ -1,0 +1,63 @@
+File: homework4.pdf
+Author: P.J. Leyden
+Date: November 13th, 2019
+
+Homework 4
+
+1)
+	Input: k = number of clusters | datapoints = set of data points
+	Output: data points will be labeled with their cluster id
+
+	k_means(k, datapoints):
+		centroids[k] //array of size k for storing centroids
+		for i = 0, i < k, ++i:
+			centroids[i] = random point from datapoints
+		bool significant_change = true
+		while(significant_change)
+			significant_change = false
+			for each x in datapoints
+				smallest_dist = dist(x, centroids[0])
+				smallest_dist_id = 0
+				cluster_id = 0
+				for each c in centroids 
+					if(dist(x, c) < smallest_dist)
+						smallest_dist = dist(x, c)
+						smallest_dist_id = cluster_id
+					cluster_id += 1
+				if(x.label != smallest_id)
+					significant_change = true
+				x.label = smallest_id
+	end
+	
+2)
+	Note: Will be using a KDTree for quick nearest neighbour lookup
+	Input: k = number of clusters | datapoints = set of data points
+	Output: data points will be labeled with their cluster id
+
+	agglomerative(k, datapoints):
+		kdtree kdt = kdtree(datapoints)
+		while kdt.root.num_children > k:
+			node1 = datapoints[0]
+			node2 = datapoints[1]
+			shortest_dist = dist(node1, node2)
+			for each x in datapoints
+				y = kdt.nearestNeighbour(x)
+				if(dist(x, y) < shortest_dist)
+					node1 = x; node2 = y
+					shortest_dist = dist(x, y)
+			z = merge(node1, node2)
+			kdtree.remove(node1)
+			kdtree.remove(node2)
+			kdtree.add(z)
+	end
+
+3)
+	Input: k = number of clusters | datapoints = set of data points
+	Output: data points wili be labeled with their cluster id
+
+	divisive(k, datapoints):
+		
+
+
+
+
