@@ -145,8 +145,7 @@ AST::~AST(){
 // Copy Constructor for AST
 //
 AST::AST(const AST& actual) {
-
-
+    std::cerr << "=====================================================Copy\n";
     nodeType = actual.nodeType;
     tag = actual.tag;
     closeTag = actual.closeTag;
@@ -271,7 +270,7 @@ void AST::mainHeader(std::vector<std::string>& profileNames, std::vector<std::st
 //  Adds in the includes and profile variables for non-main files
 //
 void AST::fileHeader(const std::string& profileName) {
-
+/*
     //NEED TO IMPLEMENT
     //Skip down a couple lines.
     //For each file profile name, add a new node with a profile 
@@ -291,6 +290,7 @@ void AST::fileHeader(const std::string& profileName) {
         child.insert(it, new AST(token, "#include \"profile.hpp\"\n"));//takes what type it is... it is of type AST* so...
         child.insert(it, new AST(token, "extern profile " + profileName + ";"));
     }
+    */
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -298,6 +298,8 @@ void AST::fileHeader(const std::string& profileName) {
 // Assumes only one return at end of main body.
 //
 void AST::mainReport(std::vector<std::string>& profileNames) {
+
+    /*
     std::cerr << "Start Report\n";
     //NEED TO IMPLEMENT
     //Find the function with name main and then start from the end.
@@ -344,6 +346,7 @@ void AST::mainReport(std::vector<std::string>& profileNames) {
         child.insert(it, new AST(token, "std::cout << " + profileNames[i] + " << endl;\n"));
     }
     std::cerr << "Left Report\n";
+    */
 }
 
 
@@ -360,7 +363,7 @@ void AST::funcCount(const std::string& profileName) {
     //        Find the function name
     //        Find block and insert line as first line in block
     //
-
+/*
     std::list<AST*>::iterator it = child.begin();
     while(it != child.end()){
         if(it -> tag == "function"){
@@ -375,7 +378,7 @@ void AST::funcCount(const std::string& profileName) {
         }
         ++it;
     }
-
+*/
 
 }
 
